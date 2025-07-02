@@ -62,9 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   const slideLinks = [
-    'projects/vision-street-wear.html', 
-    'projects/denim-society.html',
-    'projects/photography.html',
+    '../projects/vision-street-wear.html', 
+    '../projects/denim-society.html',
+    '../projects/photography.html',
     'projects/croyds.html',
     'https://link-for-slide-5.com'
   ];
