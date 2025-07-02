@@ -1101,7 +1101,7 @@ height:100vh;
 .small-images-row-2 .small-image:nth-child(1){
   width:300px;
   aspect-ratio: 1.34/1;
-  background-image: url('/assets/Warriors-heart_2.webp');
+  background-image: url('../assets/Warriors-heart_2.webp');
 }
 
 .small-images-row-3 .small-image:nth-child(1){
