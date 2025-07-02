@@ -1089,13 +1089,13 @@ height:100vh;
 .small-images-row-1 .small-image:nth-child(1){
   width:250px;
   aspect-ratio: 1.34/1;
-  background-image: url('assets/Comp-3.jpg');
+  background-image: url('website/assets/Comp-3.jpg');
 }
 
 .small-images-row-1 .small-image:nth-child(2){
   width:200px;
   aspect-ratio: 1/1.2;
-  background-image: url('assets/Magazine-Front-Page.webp');
+  background-image: url('website/assets/Magazine-Front-Page.webp');
 }
 
 .small-images-row-2 .small-image:nth-child(1){
