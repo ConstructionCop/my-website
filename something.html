@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <title>Infinite Vertical Scroll</title>
+    <style>
+    
+        
+        body {
+            font-family: Arial, sans-serif;
+    width:100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: #000000;
+        }
+        
+        .infinite-scroll-container {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            background-color: #1e1e1e;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .vertical-scroll-container {
+            height: 500px;
+            overflow-y: auto;
+            position: relative;
+            scroll-behavior: auto;
+        }
+        
+        /* Custom scrollbar styling */
+        .vertical-scroll-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-track {
+            background-color: #2a2a2a;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+        
+        .project-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 16px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .scroll-project-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            width: 60px;
+        }
+        
+        .scroll-project-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            flex: 1;
+            text-align: center;
+            padding: 0 20px;
+            color: #ffffff;
+        }
+        
+        .scroll-project-image {
+            width: 160px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="infinite-scroll-container">
+        <h2>Infinite Vertical Scroll</h2>
+        <div class="scroll-container" id="scrollContainer">
+            <!-- Content will be dynamically inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample project data
+            const projects = [
+                { id: '01', title: 'Project Alpha', imageUrl: 'https://via.placeholder.com/300x200/3498db/ffffff' },
+                { id: '02', title: 'Project Beta', imageUrl: 'https://via.placeholder.com/300x200/e74c3c/ffffff' },
+                { id: '03', title: 'Project Gamma', imageUrl: 'https://via.placeholder.com/300x200/2ecc71/ffffff' },
+                { id: '04', title: 'Project Delta', imageUrl: 'https://via.placeholder.com/300x200/f39c12/ffffff' },
+                { id: '05', title: 'Project Epsilon', imageUrl: 'https://via.placeholder.com/300x200/9b59b6/ffffff' },
+            ];
+
+            const scrollContainer = document.getElementById('scrollContainer');
+            
+            // Create function to generate project item HTML
+            function createProjectItem(project, index) {
+                const projectItem = document.createElement('div');
+                projectItem.className = 'project-item';
+                projectItem.innerHTML = `
+                    <div class="scroll-project-number">${project.id}</div>
+                    <div class="scroll-project-title">${project.title}</div>
+                    <img class="scroll-project-image" src="${project.imageUrl}" alt="${project.title}">
+                `;
+                return projectItem;
+            }
+
+            // Initialize with three copies of projects for infinite scroll effect
+            function initializeScroll() {
+                // Clear existing content
+                scrollContainer.innerHTML = '';
+                
+                // Add three sets of the projects (before, current, after)
+                [...projects, ...projects, ...projects].forEach((project, index) => {
+                    scrollContainer.appendChild(createProjectItem(project, index));
+                });
+            }
+
+            // Initialize the scroll container
+            initializeScroll();
+            
+            // Set initial scroll position to the middle set
+            let itemHeight;
+            
+            // Calculate heights and set initial position
+            function setupScroll() {
+                const containerHeight = scrollContainer.scrollHeight;
+                const totalItems = projects.length * 3; // Three copies
+                itemHeight = containerHeight / totalItems;
+                
+                // Start at the second set of items (middle)
+                scrollContainer.scrollTop = itemHeight * projects.length;
+            }
+            
+            // We need to wait for images to load to get accurate heights
+            if (document.readyState === 'complete') {
+                setupScroll();
+            } else {
+                window.addEventListener('load', setupScroll);
+            }
+
+            // Handle scroll events
+            scrollContainer.addEventListener('scroll', function() {
+                if (!itemHeight) {
+                    const containerHeight = scrollContainer.scrollHeight;
+                    const totalItems = projects.length * 3;
+                    itemHeight = containerHeight / totalItems;
+                }
+                
+                // When we've scrolled past the second set, jump back to the first set
+                if (scrollContainer.scrollTop >= itemHeight * projects.length * 2) {
+                    scrollContainer.scrollTop = scrollContainer.scrollTop - (itemHeight * projects.length);
+                }
+                
+                // When we've scrolled above the first set, jump to the second set
+                if (scrollContainer.scrollTop <= 0) {
+                    scrollContainer.scrollTop = scrollContainer.scrollTop + (itemHeight * projects.length);
+                }
+            });
+        });
+    </script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sample project data
+        const projects = [
+            { id: '01', title: 'Project Alpha', imageUrl: 'https://via.placeholder.com/300x200/3498db/ffffff' },
+            { id: '02', title: 'Project Beta', imageUrl: 'https://via.placeholder.com/300x200/e74c3c/ffffff' },
+            { id: '03', title: 'Project Gamma', imageUrl: 'https://via.placeholder.com/300x200/2ecc71/ffffff' },
+            { id: '04', title: 'Project Delta', imageUrl: 'https://via.placeholder.com/300x200/f39c12/ffffff' },
+            { id: '05', title: 'Project Epsilon', imageUrl: 'https://via.placeholder.com/300x200/9b59b6/ffffff' },
+        ];
+
+        const scrollContainer = document.getElementById('scrollContainer');
+        
+        // Create function to generate project item HTML
+        function createProjectItem(project, index) {
+            const projectItem = document.createElement('div');
+            projectItem.className = 'project-item';
+            projectItem.innerHTML = `
+                <div class="scroll-project-number">${project.id}</div>
+                <div class="scroll-project-title">${project.title}</div>
+                <img class="scroll-project-image" src="${project.imageUrl}" alt="${project.title}">
+            `;
+            return projectItem;
+        }
+
+        // Initialize with three copies of projects for infinite scroll effect
+        function initializeScroll() {
+            // Clear existing content
+            scrollContainer.innerHTML = '';
+            
+            // Add three sets of the projects (before, current, after)
+            [...projects, ...projects, ...projects].forEach((project, index) => {
+                scrollContainer.appendChild(createProjectItem(project, index));
+            });
+        }
+
+        // Initialize the scroll container
+        initializeScroll();
+        
+        // Set initial scroll position to the middle set
+        let itemHeight;
+        
+        // Calculate heights and set initial position
+        function setupScroll() {
+            const containerHeight = scrollContainer.scrollHeight;
+            const totalItems = projects.length * 3; // Three copies
+            itemHeight = containerHeight / totalItems;
+            
+            // Start at the second set of items (middle)
+            scrollContainer.scrollTop = itemHeight * projects.length;
+        }
+        
+        // We need to wait for images to load to get accurate heights
+        if (document.readyState === 'complete') {
+            setupScroll();
+        } else {
+            window.addEventListener('load', setupScroll);
+        }
+
+        // Handle scroll events
+        scrollContainer.addEventListener('scroll', function() {
+            if (!itemHeight) {
+                const containerHeight = scrollContainer.scrollHeight;
+                const totalItems = projects.length * 3;
+                itemHeight = containerHeight / totalItems;
+            }
+            
+            // When we've scrolled past the second set, jump back to the first set
+            if (scrollContainer.scrollTop >= itemHeight * projects.length * 2) {
+                scrollContainer.scrollTop = scrollContainer.scrollTop - (itemHeight * projects.length);
+            }
+            
+            // When we've scrolled above the first set, jump to the second set
+            if (scrollContainer.scrollTop <= 0) {
+                scrollContainer.scrollTop = scrollContainer.scrollTop + (itemHeight * projects.length);
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>jQuery(document).ready(function($){
+    //check if the .image-container is in the viewport 
+    //if yes, animate it
+    checkPosition($('.image-container'));
+    $(window).on('scroll', function(){
+        checkPosition($('.image-container'));
+    });
+    
+    //make the .handle element draggable and modify .resize-image width according to its position
+    drags($('.handle'), $('.resize-image'), $('.image-container'), $('.image-label[data-type="original"]'), $('.image-label[data-type="modified"]'));
+
+    //upadate images label visibility
+    $(window).on('resize', function(){
+        updateLabel($('.image-label[data-type="modified"]'), $('.resize-image'), 'left');
+        updateLabel($('.image-label[data-type="original"]'), $('.resize-image'), 'right');
+    });
+});
+
+function checkPosition(container) {
+    if( $(window).scrollTop() + $(window).height()*0.5 > container.offset().top) {
+        container.addClass('is-visible');
+        //you can uncomment the following line if you don't have other events to bind to the window scroll
+        // $(window).off('scroll');
+    }
+}
+
+//draggable funtionality
+function drags(dragElement, resizeElement, container, labelContainer, labelResizeElement) {
+    dragElement.on("mousedown vmousedown", function(e) {
+        dragElement.addClass('draggable');
+        resizeElement.addClass('resizable');
+
+        var dragWidth = dragElement.outerWidth(),
+            xPosition = dragElement.offset().left + dragWidth - e.pageX,
+            containerOffset = container.offset().left,
+            containerWidth = container.outerWidth(),
+            minLeft = containerOffset + 10,
+            maxLeft = containerOffset + containerWidth - dragWidth - 10;
+        
+        dragElement.parents().on("mousemove vmousemove", function(e) {
+            leftValue = e.pageX + xPosition - dragWidth;
+            
+            //constrain the draggable element to move inside his container
+            if(leftValue < minLeft ) {
+                leftValue = minLeft;
+            } else if ( leftValue > maxLeft) {
+                leftValue = maxLeft;
+            }
+
+            widthValue = (leftValue + dragWidth/2 - containerOffset)*100/containerWidth+'%';
+            
+            $('.draggable').css('left', widthValue).on("mouseup vmouseup", function() {
+                $(this).removeClass('draggable');
+                resizeElement.removeClass('resizable');
+            });
+
+            $('.resizable').css('width', widthValue); 
+
+            updateLabel(labelResizeElement, resizeElement, 'left');
+            updateLabel(labelContainer, resizeElement, 'right');
+            
+        }).on("mouseup vmouseup", function(e){
+            dragElement.removeClass('draggable');
+            resizeElement.removeClass('resizable');
+        });
+        e.preventDefault();
+    }).on("mouseup vmouseup", function(e) {
+        dragElement.removeClass('draggable');
+        resizeElement.removeClass('resizable');
+    });
+}
+
+function updateLabel(label, resizeElement, position) {
+    if(position == 'left') {
+        ( label.offset().left + label.outerWidth() < resizeElement.offset().left + resizeElement.outerWidth() ) ? label.removeClass('is-hidden') : label.addClass('is-hidden') ;
+    } else {
+        ( label.offset().left > resizeElement.offset().left + resizeElement.outerWidth() ) ? label.removeClass('is-hidden') : label.addClass('is-hidden') ;
+    }
+}</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+   const hamburgerBtn = document.getElementById('hamburgerBtn');
+const hamburgerBtnMenu = document.getElementById('hamburgerBtnMenu');
+const body = document.body;
+
+// Open the menu when clicking the main hamburger button
+hamburgerBtn.addEventListener('click', function() {
+  body.classList.add('menu-open');
+});
+
+hamburgerBtnMenu.addEventListener('click', function() {
+  body.classList.add('menu-closing');
+  
+  setTimeout(function() {
+    body.classList.remove('menu-open');
+    body.classList.remove('menu-closing');
+  }, 0); // Enough time for the transitions to complete
+});
+  </script>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initial check for elements in viewport on page load
+    const elements = document.querySelectorAll('.fade-in-up');
+    checkVisibility(elements);
+    
+    // Check again when scrolling
+    window.addEventListener('scroll', function() {
+      checkVisibility(elements);
+    });
+    
+    function checkVisibility(elements) {
+      elements.forEach(element => {
+        // Get element position relative to viewport
+        const position = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // If element is in viewport (with some buffer)
+        if (position.top < windowHeight * 0.9) {
+          element.classList.add('visible');
+        }
+      });
+    }
+  });
+</script>
+
+
+
+
+
+<script>
+ // Define a RandomCharacterAnimation class
+class RandomCharacterAnimation {
+  constructor(element, options = {}) {
+    this.element = element;
+    this.originalText = element.innerText;
+    this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+    this.iterations = options.iterations || 10;
+    this.speed = options.speed || 50;
+    this.isAnimating = false;
+    this.animationFrames = [];
+    
+    // Get the parent element (either button or anchor)
+    this.parentElement = this.findParent(element, ['button', 'a']);
+    
+    if (this.parentElement) {
+      // Bind event listeners to the parent element
+      this.parentElement.addEventListener('mouseenter', this.startAnimation.bind(this));
+      this.parentElement.addEventListener('mouseleave', this.stopAnimation.bind(this));
+      
+      // Ensure Safari can click during animation by setting pointer-events explicitly
+      this.parentElement.style.pointerEvents = 'auto';
+      this.element.style.pointerEvents = 'none';
+    }
+  }
+  
+  // Helper function to find parent element by tag names (array)
+  findParent(element, tagNames) {
+    let currentElement = element;
+    while (currentElement) {
+      if (tagNames.includes(currentElement.tagName.toLowerCase())) {
+        return currentElement;
+      }
+      currentElement = currentElement.parentElement;
+    }
+    return null;
+  }
+  
+  getRandomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }
+  
+  animateChar(index, iteration) {
+    if (!this.isAnimating) return;
+    
+    const text = this.element.innerText.split('');
+    
+    // Replace the character at index with a random character
+    if (iteration < this.iterations) {
+      text[index] = this.getRandomChar();
+      this.element.innerText = text.join('');
+      
+      // Continue animation for this character
+      const timeoutId = setTimeout(() => {
+        this.animateChar(index, iteration + 1);
+      }, this.speed);
+      
+      this.animationFrames.push(timeoutId);
+    } else {
+      // Restore original character at this position
+      text[index] = this.originalText[index];
+      this.element.innerText = text.join('');
+    }
+  }
+  
+  startAnimation() {
+    this.isAnimating = true;
+    
+    // Start animation for each character with slight delay
+    for (let i = 0; i < this.originalText.length; i++) {
+      const timeoutId = setTimeout(() => {
+        this.animateChar(i, 0);
+      }, i * 50);
+      
+      this.animationFrames.push(timeoutId);
+    }
+  }
+  
+  stopAnimation() {
+    this.isAnimating = false;
+    
+    // Clear all animation frames
+    this.animationFrames.forEach(id => clearTimeout(id));
+    this.animationFrames = [];
+    
+    // Reset text immediately
+    this.element.innerText = this.originalText;
+  }
+}
+
+// Initialize the animation for multiple element types
+document.addEventListener('DOMContentLoaded', () => {
+  // Process slide-action-buttons
+  const actionButtons = document.querySelectorAll('.slide-action-button');
+  actionButtons.forEach(button => {
+    // Make sure the button always remains clickable
+    button.style.position = 'relative';
+    button.style.pointerEvents = 'auto';
+    
+    // Extract text content (first text node)
+    let textNode = null;
+    for (const node of button.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim()) {
+        textNode = node;
+        break;
+      }
+    }
+    
+    if (textNode) {
+      const buttonText = textNode.nodeValue.trim();
+      
+      // Create a new span for the text
+      const textSpan = document.createElement('span');
+      textSpan.className = 'button-text';
+      textSpan.innerText = buttonText;
+      textSpan.style.pointerEvents = 'none'; // Ensure text can't capture clicks
+      
+      // Replace the text node with the span
+      button.replaceChild(textSpan, textNode);
+      
+      // Initialize the animation on the text span
+      new RandomCharacterAnimation(textSpan, {
+        iterations: 8,
+        speed: 30
+      });
+    }
+  });
+  
+  // Process a.button elements
+  const buttonLinks = document.querySelectorAll('a.button');
+  buttonLinks.forEach(link => {
+    // Ensure link always remains clickable
+    link.style.position = 'relative';
+    link.style.pointerEvents = 'auto';
+    
+    // Find the first span child
+    const spans = link.querySelectorAll('span');
+    if (spans.length > 0) {
+      const firstSpan = spans[0];
+      firstSpan.style.pointerEvents = 'none'; // Ensure text can't capture clicks
+      
+      // Initialize animation for the first span
+      new RandomCharacterAnimation(firstSpan, {
+        iterations: 8,
+        speed: 30
+      });
+    }
+  });
+});
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
