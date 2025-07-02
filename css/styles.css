@@ -1089,13 +1089,13 @@ height:100vh;
 .small-images-row-1 .small-image:nth-child(1){
   width:250px;
   aspect-ratio: 1.34/1;
-  background-image: url('website/assets/Comp-3.jpg');
+  background-image: url('../assets/Comp-3.jpg');
 }
 
 .small-images-row-1 .small-image:nth-child(2){
   width:200px;
   aspect-ratio: 1/1.2;
-  background-image: url('website/assets/Magazine-Front-Page.webp');
+  background-image: url('../assets/Magazine-Front-Page.webp');
 }
 
 .small-images-row-2 .small-image:nth-child(1){
@@ -1107,13 +1107,13 @@ height:100vh;
 .small-images-row-3 .small-image:nth-child(1){
   width:200px;
   aspect-ratio: 1/1.2;
-  background-image: url('assets/Ipad-Front-Page.webp');
+  background-image: url('../assets/Ipad-Front-Page.webp');
 }
 
 .small-images-row-3 .small-image:nth-child(2){
   width:250px;
   aspect-ratio: 1.34/1;
-  background-image: url('assets/Croyds\ Front\ Page.webp'); 
+  background-image: url('../assets/ Front\ Page.webp'); 
 }
 
 .large-image-row{
@@ -1126,7 +1126,7 @@ height:100vh;
 .large-image {
   width: 350px;
   aspect-ratio: 1/1.2;
-  background-image: url('assets/Max-Portrait.webp');
+  background-image: url('../assets/Max-Portrait.webp');
   background-size: cover;
   background-position: center;
   border-radius: 10px;
