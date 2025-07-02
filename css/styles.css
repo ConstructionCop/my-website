@@ -747,23 +747,23 @@ background-position: top left;
   }
   
   .slide:nth-child(1) {
-    background-image: url('/assets/Banner-Slider.webp');
+    background-image: url('../assets/Banner-Slider.webp');
   }
   
   .slide:nth-child(2) {
-    background-image: url('/assets/DS-Banner-Slider.jpg');
+    background-image: url('../assets/DS-Banner-Slider.jpg');
   }
   
   .slide:nth-child(3) {
-    background-image: url('/assets/Photography-Banner-Slider.jpg');
+    background-image: url('../assets/Photography-Banner-Slider.jpg');
   }
   
   .slide:nth-child(4) {
-    background-image: url('/assets/Croyds-Banner-Slider.jpg');
+    background-image: url('../assets/Croyds-Banner-Slider.jpg');
   }
   
   .slide:nth-child(5) {
-    background-image: url('/assets/5.jpg');
+    background-image: url('../assets/5.jpg');
   }
   
   .navigation-wrapper {
