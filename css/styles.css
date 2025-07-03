@@ -1697,7 +1697,7 @@ img {
   width: 0;
   height: 100%;
   overflow: hidden;
-  background: url("/assets/meivn-after.jpg") no-repeat left top;
+  background: url("../assets/meivn-after.jpg") no-repeat left top;
   background-size: auto 100%;
   -webkit-transform: translateZ(0);
   -moz-transform: translateZ(0);
