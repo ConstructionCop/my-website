@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   const slideLinks2 = [
-    '/my-website/projects/vision-street-wear.html',
+    '/projects/vision-street-wear.html',
     'projects/denim-society.html',
     'projects/photography.html',
     'projects/croyds.html',
