@@ -787,7 +787,8 @@ background-position: top left;
     align-self: flex-start; */
   }
   
-  .slide-title {
+  .slide-title,
+  .slide-title-index{
     font-family: 'ClashDisplay-Bold', Arial, sans-serif;
     font-size: 32px;
     color: #ffffff;
@@ -855,7 +856,8 @@ background-position: top left;
   }
   
 
-  .slide-action-button .slide-action-button-index {
+  .slide-action-button,
+  .slide-action-button-index  {
     font-family: 'IBMPlexMono-Light', Arial, sans-serif;
     display: flex;
     align-items: center;
@@ -876,7 +878,8 @@ background-position: top left;
 
 
 /* The swipe effect element */
-.slide-action-button::before {
+.slide-action-button::before,
+.slide-action-button-index::before {
     content: "";
     position: absolute;
     top: 0;
@@ -888,12 +891,14 @@ background-position: top left;
     z-index: -1;
 }
 
-.slide-action-button:hover {
+.slide-action-button:hover,
+.slide-action-button-index:hover {
     color: #000000;
     border: 2px solid #DC3E3E;
 }
 
-.slide-action-button:hover::before {
+.slide-action-button:hover::before,
+.slide-action-button-index:hover::before {
     left: 0;
 }
 
@@ -910,7 +915,8 @@ background-position: top left;
     z-index: 2;
 }
 
-.slide-action-button:hover .button-dot {
+.slide-action-button:hover .button-dot,
+.slide-action-button-index:hover .button-dot {
     background-color: black;
 }
   
