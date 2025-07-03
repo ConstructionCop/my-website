@@ -855,7 +855,7 @@ background-position: top left;
   }
   
 
-  .slide-action-button {
+  .slide-action-button .slide-action-button-index {
     font-family: 'IBMPlexMono-Light', Arial, sans-serif;
     display: flex;
     align-items: center;
@@ -872,6 +872,8 @@ background-position: top left;
     z-index: 1;
     transition: color 0.3s ease, border-color 0.3s ease;
 }
+
+
 
 /* The swipe effect element */
 .slide-action-button::before {
@@ -894,6 +896,7 @@ background-position: top left;
 .slide-action-button:hover::before {
     left: 0;
 }
+
 
 .button-dot {
     display: inline-block;

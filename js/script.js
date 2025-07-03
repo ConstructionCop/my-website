@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const dutyDescription = document.querySelector('.duty-description');
   const toolsDescription = document.querySelector('.tools-description');
   const slideActionButton = document.querySelector('.slide-action-button');
+  const slideActionButtonIndex = document.querySelector('.slide-action-button-index'); 
+
  
   // Array of titles corresponding to each slide
   const slideTitles = [
@@ -68,6 +70,14 @@ document.addEventListener('DOMContentLoaded', function() {
     '../projects/croyds.html',
     'https://link-for-slide-5.com'
   ];
+
+  const slideLinks2 = [
+    'projects/vision-street-wear.html', 
+    '../projects/denim-society.html',
+    '../projects/photography.html',
+    '../projects/croyds.html',
+    'https://link-for-slide-5.com'
+  ];
   
  
   let currentIndex = 0;
@@ -97,6 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Set action button link
         slideActionButton.onclick = () => {
           window.open(slideLinks[index], '_self');        };
+
+          slideActionButtonIndex.onclick = () => {
+            window.open(slideLinks2[index], '_self'); // or whatever your second array is called
+          };
       }
     });
   }
