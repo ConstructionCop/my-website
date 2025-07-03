@@ -85,11 +85,11 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   const slideLinks2 = [
-    '../vision-street-wear.html',
-    '/projects/denim-society.html',
-    '/projects/photography.html',
-    '/projects/croyds.html',
-    'https://link-for-slide-5.com'
+    './projects/vision-street-wear.html',    // Changed from '../vision-street-wear.html'
+    './projects/denim-society.html',         // Changed from '/projects/denim-society.html'
+    './projects/photography.html',           // Already correct
+    './projects/croyds.html',               // Already correct
+    'https://link-for-slide-5.com'          // External link, no change needed
   ];
   
   let currentIndex = 0;
