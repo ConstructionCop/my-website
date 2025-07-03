@@ -96,6 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Set up click handler for the slide title
         slideTitle.onclick = () => {
           window.open(slideLinks[index], '_self');        };
+
+          // Set up click handler for the slide title
+        slideTitle.onclick = () => {
+          window.open(slideLinks2[index], '_self');        };
         
         // Update other elements
         slideNumber.innerHTML = slideNumbers[index];
