@@ -2219,7 +2219,9 @@ display:none;  }
   }
 
 
-
+  .about-me-section{
+    width:100%;
+  }
 
   .about-text-wrapper{
     height: 100vh;
