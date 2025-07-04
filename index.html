@@ -127,7 +127,7 @@
       </div>
 
 
-
+<!--
 
     <section class="mlv-container">
         <svg id="mlv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566.95 90.92">
@@ -145,7 +145,15 @@
         </svg>
       </section>
 
-
+-->
+  
+<section class="name-title-section">
+  <div class="name-title-container">
+    <div class="name-title-text fade-in-up delay-1">Maxime</div>
+    <div class="skill-title-graphic fade-in-up delay-1">Graphic</div>
+    <div class="skill-title-cycling fade-in-up delay-1">Creator</div>
+  </div>
+</section>
 
 
 
@@ -280,7 +288,7 @@
 
 
           
-
+<!--
     <section class="banner fade-in-up" >
         <img src="assets/joey.jpg" alt="Image 1" >
         <img src="assets/istockphoto-1128274167-1024x1024.jpg" alt="Image 2">
@@ -293,7 +301,7 @@
         <img src="assets/Warriors-heart_2.webp" alt="Image 9">
         <img src="assets/Max-Portrait.webp" alt="Image 10">
       </section>
-
+-->
 
 
 
@@ -841,7 +849,140 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 
 
+<script>
+  // Word Cycling Animation Script - Add this to your existing page
 
+// Define a WordCyclingAnimation class
+class WordCyclingAnimation {
+    constructor(element, words, options = {}) {
+        this.element = element;
+        this.words = words;
+        this.currentWordIndex = 0;
+        this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+        this.iterations = options.iterations || 10;
+        this.speed = options.speed || 50;
+        this.cycleDuration = options.cycleDuration || 3000; // 3 seconds
+        this.isAnimating = false;
+        this.animationFrames = [];
+        this.cycleInterval = null;
+        
+        // Set initial word
+        this.element.innerText = this.words[0];
+        
+        // Start the cycling after a brief delay
+        setTimeout(() => {
+            this.startCycling();
+        }, 1000);
+    }
+    
+    getRandomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
+    
+    animateChar(index, iteration, targetText) {
+        if (!this.isAnimating) return;
+        
+        const text = this.element.innerText.split('');
+        
+        // Replace the character at index with a random character
+        if (iteration < this.iterations) {
+            text[index] = this.getRandomChar();
+            this.element.innerText = text.join('');
+            
+            // Continue animation for this character
+            const timeoutId = setTimeout(() => {
+                this.animateChar(index, iteration + 1, targetText);
+            }, this.speed);
+            
+            this.animationFrames.push(timeoutId);
+        } else {
+            // Restore target character at this position
+            text[index] = targetText[index] || '';
+            this.element.innerText = text.join('');
+        }
+    }
+    
+    animateToWord(targetWord) {
+        if (this.isAnimating) return;
+        
+        this.isAnimating = true;
+        const currentText = this.element.innerText;
+        const maxLength = Math.max(currentText.length, targetWord.length);
+        
+        // Clear any existing frames
+        this.animationFrames.forEach(id => clearTimeout(id));
+        this.animationFrames = [];
+        
+        // Pad the current text with spaces if it's shorter than target
+        if (currentText.length < targetWord.length) {
+            this.element.innerText = currentText.padEnd(targetWord.length, ' ');
+        }
+        
+        // Start animation for each character with slight delay
+        for (let i = 0; i < maxLength; i++) {
+            const timeoutId = setTimeout(() => {
+                this.animateChar(i, 0, targetWord);
+            }, i * 30);
+            
+            this.animationFrames.push(timeoutId);
+        }
+        
+        // Reset animation state after completion
+        const completionTime = maxLength * 30 + this.iterations * this.speed;
+        const resetTimeoutId = setTimeout(() => {
+            this.isAnimating = false;
+            this.element.innerText = targetWord;
+        }, completionTime);
+        
+        this.animationFrames.push(resetTimeoutId);
+    }
+    
+    cycleToNextWord() {
+        this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
+        const nextWord = this.words[this.currentWordIndex];
+        this.animateToWord(nextWord);
+    }
+    
+    startCycling() {
+        this.cycleInterval = setInterval(() => {
+            this.cycleToNextWord();
+        }, this.cycleDuration);
+    }
+    
+    stopCycling() {
+        if (this.cycleInterval) {
+            clearInterval(this.cycleInterval);
+            this.cycleInterval = null;
+        }
+        
+        // Clear all animation frames
+        this.animationFrames.forEach(id => clearTimeout(id));
+        this.animationFrames = [];
+        this.isAnimating = false;
+    }
+}
+
+// Initialize the cycling animation when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing word cycling animation...');
+    
+    // Find the cycling element
+    const cyclingElement = document.querySelector('.skill-title-cycling');
+    
+    if (cyclingElement) {
+        console.log('Found cycling element, starting animation...');
+        
+        // Initialize with the words you want to cycle through
+        new WordCyclingAnimation(cyclingElement, ['Creator', 'Artist'], {
+            iterations: 8,
+            speed: 30,
+            cycleDuration: 3000 // 3 seconds
+        });
+    } else {
+        console.log('Cycling element not found - make sure you have an element with class "skill-title-cycling"');
+    }
+});
+</script>
 
 
 

@@ -141,10 +141,9 @@
 
       <div class="infinite-scroll-container">
         <div class="vertical-scroll-container" id="scrollContainer">
-            <!-- Content will be dynamically inserted here by JavaScript -->
+            
         </div>
     </div>
-
 
 
 
@@ -196,7 +195,7 @@
         const projectItem = document.createElement('div');
         projectItem.className = 'project-item';
         projectItem.innerHTML = `
-            <a href="${project.link}" class="project-link" style="opacity: 0.3; transition: opacity 0.3s ease;">
+            <a href="${project.link}" class="project-link" style="opacity: 1;">
                 <div class="scroll-project-left">
                     <div class="scroll-project-number">${project.id}</div>
                     <div class="scroll-project-title">${project.title}</div>
@@ -210,14 +209,6 @@
             </a>
         `;
         
-        // Add hover effect
-        const projectLink = projectItem.querySelector('.project-link');
-        projectLink.addEventListener('mouseenter', function() {
-            this.style.opacity = '1';
-        });
-        projectLink.addEventListener('mouseleave', function() {
-            this.style.opacity = '0.3';
-        });
         return projectItem;
     }
 
@@ -279,6 +270,8 @@
     });
 });
 </script>
+
+
 
 
 
