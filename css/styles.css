@@ -2107,22 +2107,31 @@ scrollbar-width: none;  /* Firefox */
     z-index: 1000;
   }
 
+  .button {
+    transition: none;
+  }
+  
+  .button::before {
+    transition: none;
+  }
+  
   .button:hover {
-    /* Override hover styles for mobile */
-    background-color: initial !important;
-    color: initial !important;
-    transform: none !important;
-}
+    color: white;
+    border: 2px solid #818181;
+  }
+  
+  .button:hover::before {
+    left: -100%;
+  }
+  
+  .button-dot {
+    transition: none;
+  }
+  
+  .button:hover .button-dot {
+    background-color: white;
+  }
 
-/* Or completely disable hover interactions */
-.button {
-    pointer-events: auto;
-}
-
-.button:active {
-    /* Use :active instead of :hover for mobile feedback */
-    /* Add your button pressed styles here */
-}
   
 
   .mlv-container{
