@@ -2106,6 +2106,12 @@ scrollbar-width: none;  /* Firefox */
     top: 0;
     z-index: 1000;
   }
+
+  .button:hover {
+    background-color: initial !important;
+    color: initial !important;
+    transform: none !important;
+}
   
 
   .mlv-container{
