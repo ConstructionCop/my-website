@@ -1171,7 +1171,7 @@ margin: 75px 0 100px 0;
   justify-content: center;
   align-items: flex-end;
   margin-bottom:250px;
-  z-index:10
+  z-index:10;
 
 }
 
@@ -1182,7 +1182,7 @@ margin: 75px 0 100px 0;
     background-size: cover;
     background-position: center;
     border-radius: 10px;
-    z-index:10
+    z-index:10;
 }
 
 
