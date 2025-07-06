@@ -103,7 +103,7 @@ a {
     
 }
 
-.name-section, .hamburger-section, .button-section {
+.name-section, .hamburger-section, .button-section, .button-section-footer {
     flex: 1;
     display: flex;
     align-items: center;
@@ -116,7 +116,7 @@ a {
     justify-content: center;
 }
 
-.button-section {
+.button-section, .button-section-footer {
     justify-content: flex-end;
     text-decoration: none;
 
@@ -2335,8 +2335,12 @@ text-align: center;  }
 
 
   .footer-container {
-    margin: 100px 0 30px 0
+    margin: 100px 0 0 0;
+    justify-content: center;
   }
+  
+
+  
 
   .project-image-section{
     display: flex;
