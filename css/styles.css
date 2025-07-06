@@ -1080,7 +1080,7 @@ margin: 75px 0 100px 0;
   position: sticky;
   top: 0;
   height: 100vh;
-  z-index: 10; /* Add this line */
+  z-index: 0; 
 }
 
 .about-text {
@@ -1167,7 +1167,7 @@ margin: 75px 0 100px 0;
     background-size: cover;
     background-position: center;
     border-radius: 10px;
-    /* Remove z-index: 5; */
+    z-index:10
 }
 
 
