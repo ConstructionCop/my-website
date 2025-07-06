@@ -1091,7 +1091,6 @@ margin: 75px 0 100px 0;
   position: sticky;
   top: 0;
   height: 100vh;
-  z-index: 0; 
 }
 
 .about-text {
@@ -1100,6 +1099,8 @@ margin: 75px 0 100px 0;
   font-size: 32px;
   text-align: center;
   text-transform: uppercase;
+  z-index: 0; 
+
 }
 
 .images-rows{
