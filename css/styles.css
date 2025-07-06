@@ -2274,6 +2274,10 @@ display:none;  }
     flex-direction: column;
   }
 
+  .stacks-tools-box {
+    padding: 35px 20px;
+  }
+
   .contact-text{
 text-align: center;  }
   
