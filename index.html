@@ -872,19 +872,19 @@ class WordCyclingAnimation {
         document.body.appendChild(tempElement);
         
         let maxWidth = 0;
-        this.words.forEach(word => {
-            tempElement.innerText = word;
-            maxWidth = Math.max(maxWidth, tempElement.offsetWidth);
-        });
-        
-        document.body.removeChild(tempElement);
-        
-        // Set fixed width and other layout properties
-        this.element.style.width = `${maxWidth + 10}px`; // Add small buffer
-        this.element.style.display = 'inline-block';
-        this.element.style.textAlign = 'left';
-        this.element.style.overflow = 'hidden';
-        this.element.style.whiteSpace = 'nowrap';
+this.words.forEach(word => {
+    tempElement.innerText = word;
+    maxWidth = Math.max(maxWidth, tempElement.offsetWidth);
+});
+
+document.body.removeChild(tempElement);
+
+// Set fixed width and other layout properties
+this.element.style.width = '100%'; // Change this line
+this.element.style.display = 'inline-block';
+this.element.style.textAlign = 'center';
+this.element.style.overflow = 'hidden';
+this.element.style.whiteSpace = 'nowrap';
     }
     
     getRandomChar() {
