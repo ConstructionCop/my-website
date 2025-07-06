@@ -494,8 +494,7 @@ margin: 75px 0 100px 0;
   text-align: center; 
 }
 
-.name-title-text,
-.skill-title-cycling {
+.name-title-text {
   font-family: 'ClashDisplay-Bold', Arial, sans-serif;
   color: #ffffff;
   text-transform: uppercase;
@@ -511,7 +510,19 @@ margin: 75px 0 100px 0;
   line-height: 0.75;
 }
   
-  
+.skill-title-cycling {
+  font-family: 'ClashDisplay-Bold', Arial, sans-serif;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 17vw;
+  line-height: 0.75;
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  min-height: 1em; /* Prevents height changes */
+  vertical-align: top; /* Consistent vertical alignment */
+}
 
 /* 3 ICONS */
 

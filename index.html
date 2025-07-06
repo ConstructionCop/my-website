@@ -127,25 +127,7 @@
       </div>
 
 
-<!--
 
-    <section class="mlv-container">
-        <svg id="mlv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566.95 90.92">
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
-              <stop id="stop1" offset="0%" stop-color="#ff0066" />
-              <stop id="stop2" offset="33%" stop-color="#6600ff" />
-              <stop id="stop3" offset="67%" stop-color="#00ccff" />
-              <stop id="stop4" offset="100%" stop-color="#00ff66" />
-            </linearGradient>
-          </defs>
-          <path class="cls-3" d="m317.07,47.46L341.61,1.77c.42-.8-.16-1.77-1.07-1.77h-67.89c-.45,0-.86.25-1.07.64l-47.16,88.5c-.42.8.16,1.77,1.07,1.77h142.53c.45,0,.86-.25,1.07-.64l20.74-39.27c.42-.8-.16-1.77-1.07-1.77h-70.63c-.91,0-1.49-.97-1.07-1.77Z"/>
-          <path class="cls-3" d="m496.78.64l-25.74,47.95c-.21.4-.62.64-1.07.64h-1.94c-.91,0-1.49-.97-1.07-1.77L491.51,1.77c.42-.8-.16-1.77-1.07-1.77h-143.16c-.45,0-.86.25-1.07.64l-23.35,43.42c-.42.8.16,1.77,1.07,1.77h71.26c.91,0,1.49.97,1.07,1.77l-21.94,41.53c-.42.8.16,1.77,1.07,1.77h143.19c.45,0,.86-.25,1.07-.64L566.81,1.77c.42-.8-.16-1.77-1.07-1.77h-67.89c-.45,0-.86.25-1.07.64Z"/>
-          <path class="cls-3" d="m47.3.64L.14,89.15c-.42.8.16,1.77,1.07,1.77h67.89c.45,0,.86-.25,1.07-.64l23.13-43.79c.21-.4.62-.64,1.07-.64h1.56c.91,0,1.49.97,1.07,1.77l-21.94,41.53c-.42.8.16,1.77,1.07,1.77h67.89c.45,0,.86-.25,1.07-.64l23.13-43.79c.21-.4.62-.64,1.07-.64h1.18c.91,0,1.49.97,1.07,1.77l-21.94,41.53c-.42.8.16,1.77,1.07,1.77h67.89c.45,0,.86-.25,1.07-.64L266.79,1.77c.42-.8-.16-1.77-1.07-1.77H48.37c-.45,0-.86.25-1.07.64Z"/>
-        </svg>
-      </section>
-
--->
   
 <section class="name-title-section">
   <div class="name-title-container">
@@ -850,9 +832,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <script>
-  // Word Cycling Animation Script - Add this to your existing page
+  // Word Cycling Animation Script - Fixed version to prevent layout shifts
 
-// Define a WordCyclingAnimation class
 class WordCyclingAnimation {
     constructor(element, words, options = {}) {
         this.element = element;
@@ -861,10 +842,13 @@ class WordCyclingAnimation {
         this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
         this.iterations = options.iterations || 10;
         this.speed = options.speed || 50;
-        this.cycleDuration = options.cycleDuration || 3000; // 3 seconds
+        this.cycleDuration = options.cycleDuration || 3000;
         this.isAnimating = false;
         this.animationFrames = [];
         this.cycleInterval = null;
+        
+        // Fix layout by setting fixed dimensions
+        this.setupFixedLayout();
         
         // Set initial word
         this.element.innerText = this.words[0];
@@ -873,6 +857,34 @@ class WordCyclingAnimation {
         setTimeout(() => {
             this.startCycling();
         }, 1000);
+    }
+    
+    setupFixedLayout() {
+        // Calculate the width needed for the longest word
+        const tempElement = document.createElement('span');
+        tempElement.style.visibility = 'hidden';
+        tempElement.style.position = 'absolute';
+        tempElement.style.fontSize = getComputedStyle(this.element).fontSize;
+        tempElement.style.fontFamily = getComputedStyle(this.element).fontFamily;
+        tempElement.style.fontWeight = getComputedStyle(this.element).fontWeight;
+        tempElement.style.textTransform = getComputedStyle(this.element).textTransform;
+        
+        document.body.appendChild(tempElement);
+        
+        let maxWidth = 0;
+        this.words.forEach(word => {
+            tempElement.innerText = word;
+            maxWidth = Math.max(maxWidth, tempElement.offsetWidth);
+        });
+        
+        document.body.removeChild(tempElement);
+        
+        // Set fixed width and other layout properties
+        this.element.style.width = `${maxWidth + 10}px`; // Add small buffer
+        this.element.style.display = 'inline-block';
+        this.element.style.textAlign = 'left';
+        this.element.style.overflow = 'hidden';
+        this.element.style.whiteSpace = 'nowrap';
     }
     
     getRandomChar() {
@@ -884,12 +896,22 @@ class WordCyclingAnimation {
         
         const text = this.element.innerText.split('');
         
-        // Replace the character at index with a random character
         if (iteration < this.iterations) {
-            text[index] = this.getRandomChar();
+            // Only animate characters that exist in the target text
+            if (index < targetText.length) {
+                text[index] = this.getRandomChar();
+            }
+            
+            // Ensure we maintain the target length
+            while (text.length < targetText.length) {
+                text.push(' ');
+            }
+            
+            // Trim to target length
+            text.splice(targetText.length);
+            
             this.element.innerText = text.join('');
             
-            // Continue animation for this character
             const timeoutId = setTimeout(() => {
                 this.animateChar(index, iteration + 1, targetText);
             }, this.speed);
@@ -898,6 +920,13 @@ class WordCyclingAnimation {
         } else {
             // Restore target character at this position
             text[index] = targetText[index] || '';
+            
+            // Ensure correct length
+            while (text.length < targetText.length) {
+                text.push(' ');
+            }
+            text.splice(targetText.length);
+            
             this.element.innerText = text.join('');
         }
     }
@@ -907,19 +936,17 @@ class WordCyclingAnimation {
         
         this.isAnimating = true;
         const currentText = this.element.innerText;
-        const maxLength = Math.max(currentText.length, targetWord.length);
         
         // Clear any existing frames
         this.animationFrames.forEach(id => clearTimeout(id));
         this.animationFrames = [];
         
-        // Pad the current text with spaces if it's shorter than target
-        if (currentText.length < targetWord.length) {
-            this.element.innerText = currentText.padEnd(targetWord.length, ' ');
-        }
+        // Immediately set the text to the target length with spaces
+        const paddedText = currentText.padEnd(targetWord.length, ' ').substring(0, targetWord.length);
+        this.element.innerText = paddedText;
         
         // Start animation for each character with slight delay
-        for (let i = 0; i < maxLength; i++) {
+        for (let i = 0; i < targetWord.length; i++) {
             const timeoutId = setTimeout(() => {
                 this.animateChar(i, 0, targetWord);
             }, i * 30);
@@ -928,7 +955,7 @@ class WordCyclingAnimation {
         }
         
         // Reset animation state after completion
-        const completionTime = maxLength * 30 + this.iterations * this.speed;
+        const completionTime = targetWord.length * 30 + this.iterations * this.speed;
         const resetTimeoutId = setTimeout(() => {
             this.isAnimating = false;
             this.element.innerText = targetWord;
@@ -955,7 +982,6 @@ class WordCyclingAnimation {
             this.cycleInterval = null;
         }
         
-        // Clear all animation frames
         this.animationFrames.forEach(id => clearTimeout(id));
         this.animationFrames = [];
         this.isAnimating = false;
@@ -966,17 +992,15 @@ class WordCyclingAnimation {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing word cycling animation...');
     
-    // Find the cycling element
     const cyclingElement = document.querySelector('.skill-title-cycling');
     
     if (cyclingElement) {
         console.log('Found cycling element, starting animation...');
         
-        // Initialize with the words you want to cycle through
         new WordCyclingAnimation(cyclingElement, ['Creator', 'Artist'], {
             iterations: 8,
             speed: 30,
-            cycleDuration: 3000 // 3 seconds
+            cycleDuration: 3000
         });
     } else {
         console.log('Cycling element not found - make sure you have an element with class "skill-title-cycling"');
