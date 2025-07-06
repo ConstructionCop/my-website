@@ -2108,9 +2108,20 @@ scrollbar-width: none;  /* Firefox */
   }
 
   .button:hover {
+    /* Override hover styles for mobile */
     background-color: initial !important;
     color: initial !important;
     transform: none !important;
+}
+
+/* Or completely disable hover interactions */
+.button {
+    pointer-events: auto;
+}
+
+.button:active {
+    /* Use :active instead of :hover for mobile feedback */
+    /* Add your button pressed styles here */
 }
   
 
