@@ -1091,6 +1091,7 @@ margin: 75px 0 100px 0;
   position: sticky;
   top: 0;
   height: 100vh;
+  z-index: 0; 
 }
 
 .about-text {
@@ -1170,6 +1171,8 @@ margin: 75px 0 100px 0;
   justify-content: center;
   align-items: flex-end;
   margin-bottom:250px;
+  z-index:10
+
 }
 
   .large-image {
