@@ -1073,13 +1073,14 @@ margin: 75px 0 100px 0;
   width:70%;
 }
 
-.about-text-wrapper{
+.about-text-wrapper {
   display: flex;
-  align-items: center; /* Vertically centers the content */
+  align-items: center;
   justify-content: center;
-  position: sticky; 
-top:0;
-height:100vh;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 10; /* Add this line */
 }
 
 .about-text {
@@ -1159,15 +1160,16 @@ height:100vh;
   margin-bottom:250px;
 }
 
-.large-image {
-  width: 350px;
-  aspect-ratio: 1/1.2;
-  background-image: url('../assets/Max-Portrait.webp');
-  background-size: cover;
-  background-position: center;
-  border-radius: 10px;
-  z-index: 5;
+  .large-image {
+    width: 350px;
+    aspect-ratio: 1/1.2;
+    background-image: url('../assets/Max-Portrait.webp');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    /* Remove z-index: 5; */
 }
+
 
 .contact-section {
   display: flex;
