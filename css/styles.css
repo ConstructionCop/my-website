@@ -2470,4 +2470,17 @@ text-align: center;  }
     padding-right: 25px;
   }
 
+  .project-header {
+    margin-top: 50px;
+  }
+
+  .project-title{
+    font-size: 10vw;
+    line-height: 4vh;
+  }
+
+  .project-tools{
+    gap:20px;
+  }
+
 }
