@@ -197,11 +197,15 @@
         projectItem.innerHTML = `
             <a href="${project.link}" class="project-link" style="opacity: 1;">
                 <div class="scroll-project-left">
+                  <div class="scroll-project-number-title">
                     <div class="scroll-project-number">${project.id}</div>
                     <div class="scroll-project-title">${project.title}</div>
+                  </div>
+                  <div class="scroll-project-image-container">
                     <img class="scroll-project-image" src="${project.imageUrl}" alt="${project.title}">
                     <img class="scroll-project-image" src="${project.imageUrl2}" alt="${project.title}">
                     <img class="scroll-project-image" src="${project.imageUrl3}" alt="${project.title}">
+                  </div>
                 </div>
                 <div class="scroll-project-right">
                     <div class="scroll-project-year">${project.year}</div>
