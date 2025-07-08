@@ -673,6 +673,7 @@ margin: 75px 0 100px 0;
 }
 
 
+
 .square-box {
     border: 2px solid #818181;
     border-radius: 10px;
@@ -2245,6 +2246,10 @@ display:none;  }
 
   }
 
+  .name-title-section{
+    margin: 40px 0 40px 0;
+  }
+
   .banner{
     margin-top: 50px;
     height:400px;
@@ -2273,6 +2278,18 @@ display:none;  }
   .services-right-section{
     display: flex;
     flex-direction: column;
+  }
+
+  .square-box{
+    align-items:center;
+  }
+
+  .dot-container{
+    justify-content: center;
+  }
+
+  .box-paragraph{
+    text-align: center;
   }
 
   .slider-section{
@@ -2372,6 +2389,8 @@ display:none;  }
 
   .stacks-tools-box {
     padding: 35px 20px;
+    align-items: center;
+    text-align: center;
   }
 
   .contact-text{
@@ -2490,6 +2509,22 @@ text-align: center;  }
     gap:80px;
     align-items: center;
     margin-top:40px;
+  }
+
+  .form-title{
+    text-align: center;
+  }
+
+  .form-paragraph{
+    text-align: center;
+  }
+
+  .form-text{
+    align-items: center;
+  }
+
+  .form-contact-text{
+    align-items: center;
   }
 
   .image-contact {
