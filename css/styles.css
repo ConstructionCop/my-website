@@ -2554,4 +2554,26 @@ text-align: center;  }
     gap:20px;
   }
 
+  .project-link{
+    justify-content: center;
+  }
+
+  .scroll-project-left{
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .scroll-project-number-title{
+    flex-direction: column;
+  }
+
+  .scroll-project-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .scroll-project-right{
+    display:none;
+  }
+
 }
