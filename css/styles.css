@@ -1326,7 +1326,6 @@ margin: 75px 0 100px 0;
   background-size: cover;
   border-radius: 12px;
   height: calc(70vw * 0.6); /* You can tweak this multiplier */
-  background-position:top;
 }
 
 .project-video{
@@ -1335,25 +1334,35 @@ margin: 75px 0 100px 0;
   background-position:center;
 }
 
-.ariana{
-  grid-column: span 5;
+.croyds-pages{
+  grid-column: span 7;
+  background-position: center;
+}
 
+.croyds-book{
+  grid-column:  span 7;
+  background-position:center;
+}
+
+.ariana-streets{
+  grid-column: span 5;
 }
 
 .warrior-spirit{
   grid-column:  span 7;
+  background-position:center;
 }
 
-.arina{
+.arina-smoke{
   grid-column:  span 4;
+  background-position:center;
+
 }
 
-.arina2{
+.ariana-woods{
   grid-column:  span 8;
-}
+  background-position:center;
 
-.arina3{
-  grid-column:  span 4;
 }
 
 .daphne{
@@ -1362,21 +1371,19 @@ margin: 75px 0 100px 0;
 
 .joey{
   grid-column:  span 4;
+  background-position: center;;
 }
 
 .carlo{
   grid-column:  span 4;
 }
 
-.val{
+.arina-bed{
   grid-column:  span 8;
+  background-position:right;
 }
 
 .ariana2{
-  grid-column:  span 6;
-}
-
-.mevin{
   grid-column:  span 6;
 }
 
@@ -1387,6 +1394,24 @@ margin: 75px 0 100px 0;
 .vsw-magazine-mobile{
   display:none;
 }
+
+.ds-ipad{
+  grid-column:  span 4;
+  background-position: center;
+}
+
+.ds-websites-banner{
+  grid-column:  span 8;
+  background-position: center;
+}
+
+.ds-newsletter{
+  grid-column:  span 12;
+  height: calc(100vw * 0.6);
+  background-position: center;
+
+}
+
 
 .vsw-ads-resize{
   grid-column: span 4;
@@ -1416,10 +1441,14 @@ margin: 75px 0 100px 0;
   align-items: center; 
 }
 
-.ds-newsletter{
-  grid-column:  span 12;
-  height: calc(100vw * 0.6);
+.vsw-iphone-banner{
+  grid-column:  span 7;
+  background-position: center;
+}
 
+.vsw-ipad{
+  grid-column:  span 4;
+  background-position: center;
 }
 
 .square-slideshow {
@@ -1454,11 +1483,6 @@ margin: 75px 0 100px 0;
   14.28% { opacity: 1; } /* Each image visible for ~14.28% of the total animation (0.8s) */
   14.29% { opacity: 0; }
   100% { opacity: 0; }
-}
-
-.vsw-iphone-banner{
-  grid-column:  span 7;
-
 }
 
 .scroll-vsw {
@@ -1555,8 +1579,8 @@ margin: 75px 0 100px 0;
 }
 
 .croyds-video-static{
-  height: auto;
   grid-column:  span 8;
+  background-position: center;
 }
 
 .croyds-video-story{
@@ -2267,6 +2291,7 @@ display:none;  }
 
   .navigation-container{
     order:2;
+    align-items: center;
   }
 
   .navigation-wrapper{
@@ -2279,8 +2304,16 @@ display:none;  }
 
   .slide-title-button{
     width:100%;
+    align-items: center;
   }
 
+  .slide-title{
+    text-align: center;
+  }
+
+  .slide-number{
+    font-size: 16px;
+  }
 
   .about-me-section{
     width:100%;
@@ -2395,6 +2428,8 @@ text-align: center;  }
 
   .project-description{
     flex-direction: column;
+    text-align: center;
+    align-items:center;
   }
 
   .project-description-paragraph{
@@ -2446,6 +2481,7 @@ text-align: center;  }
   
   .vsw-magazine-mobile{
     display: block;
+    background-position: center;;
   }
 
 
