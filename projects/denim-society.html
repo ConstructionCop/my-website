@@ -162,15 +162,26 @@
 
       <div class="project-image-section">
         <div class="project-image ds-iphone-banner fade-in-up" style="background-image: url('../assets/ds-Iphone-Mockup-Banner.jpg');"></div>
-        <div class="project-image ds-long-ads fade-in-up">
-          <div class="long-slideshow">
+        <div class="project-image ds-rectangle-ads fade-in-up">
+          <div class="rectangle-slideshow">
+            <img src="../assets/DS_1200x628_BOGO.jpg" alt="Image 1">
             <img src="../assets/DS_1200x628_BOXING_DAY.jpg" alt="Image 1">
+            <img src="../assets/DS_1200x628_CARGO.jpg" alt="Image 1">
+            <img src="../assets/DS_1200x628_HOLIDAY_LOOK.jpg" alt="Image 1">
+            <img src="../assets/DS_1200x628_LOVE_ALWAYS_2.jpg" alt="Image 1">
             <img src="../assets/DS_1200x628_LOVE_ALWAYS.jpg" alt="Image 1">
             <img src="../assets/DS_1200x628_NEW_SEASON.jpg" alt="Image 1">
-            <img src="../assets/DS_1200x628_BOGO.jpg" alt="Image 1">
-            <img src="../assets/DS_1200x628_LOVE_ALWAYS_2.jpg" alt="Image 1">
-            <img src="../assets/DS_1200x628_HOLIDAY_LOOK.jpg" alt="Image 1">
-            <img src="../assets/DS_1200x628_CARGO.jpg" alt="Image 1">
+          </div>
+        </div>
+        <div class="project-image ds-square-ads fade-in-up">
+          <div class="square-slideshow">
+            <img src="../assets/DS_1080x1080_BOXING_DAY.jpg" alt="Image 1">
+            <img src="../assets/DS_1080x1080_VACATION.jpg" alt="Image 1">
+            <img src="../assets/DS_1080x1080_NEW_SEASON.jpg" alt="Image 1">
+            <img src="../assets/DS_1080x1080_BOGO.jpg" alt="Image 1">
+            <img src="../assets/DS_1080x1080_PREBOXING_WEEK.jpg" alt="Image 1">
+            <img src="../assets/DS_1080x1080_DENIM_WORKS.png" alt="Image 1">
+            <img src="../assets/DS_1080x1080_50_70.jpg" alt="Image 1">
           </div>
         </div>
       </div>
@@ -374,12 +385,12 @@
       <div class="indicator"></div>
       <div class="indicator"></div>
       <div class="indicator"></div>
-      <div class="indicator"></div>
     </div>
     <div class="nav-button nav-right">NEXT</div>
   </div>
     <div class="slide-number">01</div>
-  </div>
+  
+</div>
 
         <div class="slider-container fade-in-up">
             <div class="slider">
@@ -387,7 +398,6 @@
               <a href="../projects/denim-society.html" class="slide"></a>
               <a href="../projects/photography.html" class="slide"></a>
               <a href="../projects/croyds.html" class="slide"></a>
-              <a href="https://link-for-slide-5.com" class="slide"></a>
             </div>
          </div>
     </div>
@@ -604,8 +614,8 @@ class RandomCharacterAnimation {
     this.isAnimating = false;
     this.animationFrames = [];
     
-    // Get the parent element (either button or anchor)
-    this.parentElement = this.findParent(element, ['button', 'a']);
+    // Get the parent element (either button, anchor, or name-section)
+    this.parentElement = this.findParent(element, ['button', 'a', 'div']);
     
     if (this.parentElement) {
       // Bind event listeners to the parent element
@@ -739,6 +749,33 @@ document.addEventListener('DOMContentLoaded', () => {
         speed: 30
       });
     }
+  });
+  
+  // Process .name elements (anchor tags)
+  const nameElements = document.querySelectorAll('a.name');
+  nameElements.forEach(nameElement => {
+    // Store the original href for later use
+    const originalHref = nameElement.href;
+    
+    // Wrap the text content in a span
+    const originalText = nameElement.innerText;
+    const textSpan = document.createElement('span');
+    textSpan.innerText = originalText;
+    textSpan.style.pointerEvents = 'none'; // Prevent span from capturing clicks
+    
+    // Clear the anchor and add the span
+    nameElement.innerHTML = '';
+    nameElement.appendChild(textSpan);
+    
+    // Ensure the anchor remains clickable
+    nameElement.style.pointerEvents = 'auto';
+    nameElement.style.position = 'relative';
+    
+    // Initialize animation on the text span, triggered by the anchor
+    new RandomCharacterAnimation(textSpan, {
+      iterations: 10,
+      speed: 40
+    });
   });
 });
   </script>

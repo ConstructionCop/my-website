@@ -133,7 +133,7 @@
   <div class="name-title-container">
     <div class="name-title-text fade-in-up delay-1">Maxime</div>
     <div class="skill-title-graphic fade-in-up delay-1">Graphic</div>
-    <div class="skill-title-cycling fade-in-up delay-1">Creator</div>
+    <div class="skill-title-cycling fade-in-up delay-1">Designer</div>
   </div>
 </section>
 
@@ -361,7 +361,6 @@
       <div class="indicator"></div>
       <div class="indicator"></div>
       <div class="indicator"></div>
-      <div class="indicator"></div>
     </div>
     <div class="nav-button nav-right">NEXT</div>
   </div>
@@ -381,7 +380,6 @@
               <a href="projects/denim-society.html" class="slide"></a>
               <a href="projects/photography.html" class="slide"></a>
               <a href="projects/croyds.html" class="slide"></a>
-              <a href="https://link-for-slide-5.com" class="slide"></a>
             </div>
          </div>
     </div>
@@ -424,7 +422,7 @@
         <!-- Text that will stay fixed while scrolling -->
          <div class="about-text-wrapper">
         <div class="about-text">
-          I'm Maxime La Valliere, a web developer and graphic designer based in Montreal. With over a decade of experience creating digital experiences, I combine technical expertise with an eye for design to deliver projects that stand out.
+          I'm Maxime La Valliere, a web developer and graphic designer based in Montreal. With over a five years of experience creating digital experiences, I combine technical expertise with an eye for design to deliver projects that stand out.
         </div>
     </div>
         
@@ -521,16 +519,16 @@
 
             <div class="box-title">Organize</div>
             <div class="box-paragraph">
-                <p>I build websites using multiple components such as HTML, CSS and javascript. I focus on performance and modern design.</p>
+                <p>I begin by listening carefully to your needs—whether it's for your brand, business, or personal project. Through clear communication, I gather all the necessary details to fully understand your goals in graphic design, web development, or motion design.</p>
             </div>
         </div>
         
         <div class="square-box fade-in-up delay-1">
             <div class="stacks-tools-box-secondary-title">[02]</div>
 
-            <div class="box-title">Work</div>
+            <div class="box-title">Create</div>
             <div class="box-paragraph">
-                <p>I build websites using multiple and modern design.</p>
+                <p>Once the vision is clear, I get to work. You'll be involved throughout the creative process, with regular updates and revisions to ensure the project aligns with your expectations. Collaboration is key until you're fully satisfied.</p>
             </div>
         </div> 
 
@@ -539,7 +537,7 @@
 
             <div class="box-title">Deliver</div>
             <div class="box-paragraph">
-                <p>I build websites using multiple and modern design.</p>
+                <p>After everything is approved, I prepare and deliver your project in its final form—optimized, organized, and ready to use. Whether it’s files, websites, or visuals, you’ll receive everything you need, right on time.</p>
             </div>
         </div> 
 
@@ -832,7 +830,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <script>
-  // Word Cycling Animation Script - Fixed version to prevent layout shifts
+  // Multi-Element Word Cycling Animation Script
 
 class WordCyclingAnimation {
     constructor(element, words, options = {}) {
@@ -842,7 +840,7 @@ class WordCyclingAnimation {
         this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
         this.iterations = options.iterations || 10;
         this.speed = options.speed || 50;
-        this.cycleDuration = options.cycleDuration || 3000;
+        this.cycleDuration = options.cycleDuration || 2000;
         this.isAnimating = false;
         this.animationFrames = [];
         this.cycleInterval = null;
@@ -872,19 +870,19 @@ class WordCyclingAnimation {
         document.body.appendChild(tempElement);
         
         let maxWidth = 0;
-this.words.forEach(word => {
-    tempElement.innerText = word;
-    maxWidth = Math.max(maxWidth, tempElement.offsetWidth);
-});
+        this.words.forEach(word => {
+            tempElement.innerText = word;
+            maxWidth = Math.max(maxWidth, tempElement.offsetWidth);
+        });
 
-document.body.removeChild(tempElement);
+        document.body.removeChild(tempElement);
 
-// Set fixed width and other layout properties
-this.element.style.width = '100%'; // Change this line
-this.element.style.display = 'inline-block';
-this.element.style.textAlign = 'center';
-this.element.style.overflow = 'hidden';
-this.element.style.whiteSpace = 'nowrap';
+        // Set fixed width and other layout properties
+        this.element.style.width = '100%';
+        this.element.style.display = 'inline-block';
+        this.element.style.textAlign = 'center';
+        this.element.style.overflow = 'hidden';
+        this.element.style.whiteSpace = 'nowrap';
     }
     
     getRandomChar() {
@@ -988,23 +986,24 @@ this.element.style.whiteSpace = 'nowrap';
     }
 }
 
-// Initialize the cycling animation when page loads
+// Initialize multiple cycling animations when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing word cycling animation...');
+    console.log('DOM loaded, initializing word cycling animations...');
     
-    const cyclingElement = document.querySelector('.skill-title-cycling');
-    
-    if (cyclingElement) {
-        console.log('Found cycling element, starting animation...');
-        
-        new WordCyclingAnimation(cyclingElement, ['Creator', 'Artist'], {
+    // First cycling element (Graphic -> Website)
+    const graphicElement = document.querySelector('.skill-title-graphic');
+    if (graphicElement) {
+        console.log('Found graphic element, starting animation...');
+        new WordCyclingAnimation(graphicElement, ['Graphic', 'Website'], {
             iterations: 8,
             speed: 30,
-            cycleDuration: 3000
+            cycleDuration: 2000
         });
     } else {
-        console.log('Cycling element not found - make sure you have an element with class "skill-title-cycling"');
+        console.log('Graphic element not found - make sure you have an element with class "skill-title-graphic"');
     }
+    
+    
 });
 </script>
 

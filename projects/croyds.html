@@ -311,7 +311,6 @@
       <div class="indicator"></div>
       <div class="indicator"></div>
       <div class="indicator"></div>
-      <div class="indicator"></div>
     </div>
     <div class="nav-button nav-right">NEXT</div>
   </div>
@@ -331,7 +330,6 @@
               <a href="../projects/denim-society.html" class="slide"></a>
               <a href="../projects/photography.html" class="slide"></a>
               <a href="../projects/croyds.html" class="slide"></a>
-              <a href="https://link-for-slide-5.com" class="slide"></a>
             </div>
          </div>
     </div>
@@ -548,8 +546,8 @@ class RandomCharacterAnimation {
     this.isAnimating = false;
     this.animationFrames = [];
     
-    // Get the parent element (either button or anchor)
-    this.parentElement = this.findParent(element, ['button', 'a']);
+    // Get the parent element (either button, anchor, or name-section)
+    this.parentElement = this.findParent(element, ['button', 'a', 'div']);
     
     if (this.parentElement) {
       // Bind event listeners to the parent element
@@ -683,6 +681,33 @@ document.addEventListener('DOMContentLoaded', () => {
         speed: 30
       });
     }
+  });
+  
+  // Process .name elements (anchor tags)
+  const nameElements = document.querySelectorAll('a.name');
+  nameElements.forEach(nameElement => {
+    // Store the original href for later use
+    const originalHref = nameElement.href;
+    
+    // Wrap the text content in a span
+    const originalText = nameElement.innerText;
+    const textSpan = document.createElement('span');
+    textSpan.innerText = originalText;
+    textSpan.style.pointerEvents = 'none'; // Prevent span from capturing clicks
+    
+    // Clear the anchor and add the span
+    nameElement.innerHTML = '';
+    nameElement.appendChild(textSpan);
+    
+    // Ensure the anchor remains clickable
+    nameElement.style.pointerEvents = 'auto';
+    nameElement.style.position = 'relative';
+    
+    // Initialize animation on the text span, triggered by the anchor
+    new RandomCharacterAnimation(textSpan, {
+      iterations: 10,
+      speed: 40
+    });
   });
 });
   </script>

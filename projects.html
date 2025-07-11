@@ -8,7 +8,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 </head>
-<body class="projects-page" >
+<body>
     <header>
         <div class="header-container" id="page-beginning" >
             <div class="name-section">
@@ -139,11 +139,75 @@
     
    
 
+<!--
       <div class="infinite-scroll-container">
         <div class="vertical-scroll-container" id="scrollContainer">
             
         </div>
     </div>
+  -->
+
+
+
+  <a href="projects/vision-street-wear.html" class="project-link">
+  <div class="project-container">
+    <div class="scroll-project-number-title">
+      <div class="scroll-project-number">01</div>
+      <div class="scroll-project-title">Vision Street Wear</div>
+    </div>
+    <div class="scroll-project-image-container">
+      <img class="scroll-project-image" src="assets/EN_1080x1080_DECKS.jpg" alt="${project.title}">
+      <img class="scroll-project-image" src="assets/EN_1080x1080_BLACK_FRIDAY.jpg" alt="${project.title}">
+      <img class="scroll-project-image" src="assets/EN_1080x1080_NEW_SHOES.jpg" alt="${project.title}">
+    </div>
+    <div class="scroll-project-year">2023-2025</div>
+  </div>
+  </a>
+
+  <a href="projects/denim-society.html" class="project-link">
+  <div class="project-container">
+    <div class="scroll-project-number-title">
+      <div class="scroll-project-number">02</div>
+      <div class="scroll-project-title">Denim Society</div>
+    </div>
+    <div class="scroll-project-image-container">
+      <img class="scroll-project-image" src="assets/DS_1080x1080_BOXING_WEEK.png" alt="${project.title}">
+      <img class="scroll-project-image" src="assets/DS_1080x1080_BOGO.jpg" alt="${project.title}">
+      <img class="scroll-project-image" src="assets/DS_1080x1080_BOXING_DAY.jpg" alt="${project.title}">
+    </div>
+    <div class="scroll-project-year">2023-2025</div>
+  </div>
+  </a>
+
+  <a href="projects/photography.html" class="project-link">
+  <div class="project-container">
+    <div class="scroll-project-number-title">
+      <div class="scroll-project-number">03</div>
+      <div class="scroll-project-title">Photography</div>
+    </div>
+    <div class="scroll-project-image-container">
+      <img class="scroll-project-image" src="assets/ariana2.webp" alt="${project.title}">
+      <img class="scroll-project-image" src="assets/Warriors-heart_2.webp" alt="${project.title}">
+      <img class="scroll-project-image" src="assets/joey.webp" alt="${project.title}">
+    </div>
+    <div class="scroll-project-year">n/a</div>
+  </div>
+  </a>
+
+  <a href="projects/croyds.html" class="project-link last-project">
+  <div class="project-container">
+    <div class="scroll-project-number-title">
+      <div class="scroll-project-number">04</div>
+      <div class="scroll-project-title">Croyds</div>
+    </div>
+    <div class="scroll-project-image-container">
+      <img class="scroll-project-image" src="assets/Show_In_Tell_Blue Ryder.00_00_33_26.Still002.webp" alt="${project.title}">
+      <img class="scroll-project-image" src="assets/Croyds-Small-Scale-Art.jpg" alt="${project.title}">
+      <img class="scroll-project-image" src="assets/Comp-3.jpg" alt="${project.title}">
+    </div>
+    <div class="scroll-project-year">2025</div>
+  </div>
+  </a>
 
 
 
@@ -154,24 +218,33 @@
 
 
 
-
-
-
-
-
+<!--
     <footer>
       <div class="footer-container">
           <div class="name-section">
               <div class="name">[©2024 Maxime La Valliere]</div>
-          </div>
-          
-          
-          
-          
+          </div>     
       </div>
   </footer>
+-->
 
 
+
+<footer>
+  <div class="projects-footer">
+      <div class="name-section">
+          <div class="name">[©2024 Maxime La Valliere]</div>
+      </div>
+      
+      
+      
+      <div class="button-section-footer">
+        <a href="#" class="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+          <span id="button-text">Back to Top</span><span class="button-dot"></span>
+      </a>
+      </div>
+  </div>
+</footer>
 
 
 
@@ -440,8 +513,8 @@ class RandomCharacterAnimation {
     this.isAnimating = false;
     this.animationFrames = [];
     
-    // Get the parent element (either button or anchor)
-    this.parentElement = this.findParent(element, ['button', 'a']);
+    // Get the parent element (either button, anchor, or name-section)
+    this.parentElement = this.findParent(element, ['button', 'a', 'div']);
     
     if (this.parentElement) {
       // Bind event listeners to the parent element
@@ -575,6 +648,33 @@ document.addEventListener('DOMContentLoaded', () => {
         speed: 30
       });
     }
+  });
+  
+  // Process .name elements (anchor tags)
+  const nameElements = document.querySelectorAll('a.name');
+  nameElements.forEach(nameElement => {
+    // Store the original href for later use
+    const originalHref = nameElement.href;
+    
+    // Wrap the text content in a span
+    const originalText = nameElement.innerText;
+    const textSpan = document.createElement('span');
+    textSpan.innerText = originalText;
+    textSpan.style.pointerEvents = 'none'; // Prevent span from capturing clicks
+    
+    // Clear the anchor and add the span
+    nameElement.innerHTML = '';
+    nameElement.appendChild(textSpan);
+    
+    // Ensure the anchor remains clickable
+    nameElement.style.pointerEvents = 'auto';
+    nameElement.style.position = 'relative';
+    
+    // Initialize animation on the text span, triggered by the anchor
+    new RandomCharacterAnimation(textSpan, {
+      iterations: 10,
+      speed: 40
+    });
   });
 });
   </script>

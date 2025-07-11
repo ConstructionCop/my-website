@@ -28,11 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Array of titles corresponding to each slide
   const slideTitles = [
-    'Vision Street Wear Graphic/Web Design',
-    'Denim Society Graphic/Web Design',
+    'Vision Street Wear E-Commerce',
+    'Denim Society E-Commerce',
     'Photography',
-    'Croyds Videography',
-    'Title for Slide 5'
+    'Croyds Videography'
   ];
 
   // Corresponding slide numbers
@@ -40,59 +39,76 @@ document.addEventListener('DOMContentLoaded', function() {
     '01',
     '02',
     '03',
-    '04',
-    '05'
+    '04'
   ];
 
   const yearDescriptions = [
     '2022 - 2023',
     '2022 - 2023',
     'n/a',
-    '2025',
-    '2024'
+    '2025'
   ];
 
   const clientDescriptions = [
     'Vision Street Wear',
     'Denim Society',
     'Various',
-    'Croyds',
-    '2024'
+    'Croyds'
   ];
 
   const dutyDescriptions = [
     'GRAPHIC DESIGN<br>WEB DESIGN<br>MOTION DESIGN',
     'GRAPHIC DESIGN<br>WEB DESIGN',
     'Photoshoots<br>choreography<br>editing',
-    'Videoshoots<br>Planning<br>editing',
-    '2024'
+    'Videoshoots<br>Planning<br>editing'
   ];
 
   const toolsDescriptions = [
     'PHOTOSHOP SHOPIFY<br>HTML<br>CSS',
     'PHOTOSHOP SHOPIFY<br>HTML<br>CSS',
     'Lightroom<br>Photoshop',
-    'After Effects<br>Premiere Pro<br>Photoshop',
-    '2024'
-  ];
+    'After Effects<br>Premiere Pro<br>Photoshop'  ];
 
   const slideLinks = [
     '../projects/vision-street-wear.html', 
     '../projects/denim-society.html',
     '../projects/photography.html',
-    '../projects/croyds.html',
-    'https://link-for-slide-5.com'
+    '../projects/croyds.html'
   ];
 
   const slideLinks2 = [
     './projects/vision-street-wear.html',    // Changed from '../vision-street-wear.html'
     './projects/denim-society.html',         // Changed from '/projects/denim-society.html'
     './projects/photography.html',           // Already correct
-    './projects/croyds.html',               // Already correct
-    'https://link-for-slide-5.com'          // External link, no change needed
+    './projects/croyds.html'               // Already correct
   ];
   
-  let currentIndex = 0;
+  // Determine initial slide based on current page
+  function getInitialSlideIndex() {
+    const currentPath = window.location.pathname;
+    const currentHref = window.location.href;
+    const currentFilename = currentPath.split('/').pop();
+    
+    console.log('=== PAGE DETECTION DEBUG ===');
+    console.log('Full URL:', currentHref);
+    console.log('Current path:', currentPath);
+    console.log('Current filename:', currentFilename);
+    
+    // Check multiple ways to detect the vision-street-wear page
+    if (currentPath.includes('vision-street-wear.html') || 
+        currentHref.includes('vision-street-wear.html') || 
+        currentFilename === 'vision-street-wear.html') {
+      console.log('✅ DETECTED: On vision-street-wear page, starting with slide 2 (index 1)');
+      return 1; // Second slide (Denim Society)
+    }
+    
+    // Default to first slide for all other pages
+    console.log('❌ NOT DETECTED: Default page, starting with slide 1 (index 0)');
+    return 0;
+  }
+  
+  let currentIndex = getInitialSlideIndex();
+  console.log('Initial currentIndex set to:', currentIndex);
  
   // Reset slides
   function resetSlides() {
