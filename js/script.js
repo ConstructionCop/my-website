@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Array of titles corresponding to each slide
   const slideTitles = [
-    'Vision Street Wear E-Commerce',
-    'Denim Society E-Commerce',
+    'Vision Street Wear<br>E-Commerce',
+    'Denim Society<br>E-Commerce',
     'Photography',
     'Croyds Videography'
   ];

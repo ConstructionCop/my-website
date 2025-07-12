@@ -261,6 +261,7 @@
 
 
 
+<!--
 <figure class="image-container fade-in-up">
 	<img src="../assets/mevin-before.jpg" alt="Original Image">
 	<span class="image-label" data-type="original">Original</span>
@@ -271,6 +272,22 @@
 
 	<span class="handle"></span>
 </figure> 
+-->
+
+<section class="comparison-container"><
+<div class="comparison-wrapper" id="comparisonWrapper">
+  <img src="../assets/mevin-before.jpg" alt="Before" class="image-before">
+  <img src="../assets/meivn-after.jpg" alt="After" class="image-after" id="imageAfter">
+  
+  <div class="image-labels">
+      <span class="text-label">Before</span>
+      <span class="text-label">After</span>
+  </div>
+  
+  <div class="divider-line" id="dividerLine"></div>
+  <div class="drag-handle" id="dragHandle"></div>
+</div>
+</section>
 
 
 
@@ -306,8 +323,9 @@
 
 
 
-<div class="full-width-border"></div>
-
+<section class="full-width-border-container">
+  <div class="full-width-border"></div>
+</section>
 
 
 
@@ -398,7 +416,83 @@
 
 
 
+<script>
+ let isDragging = false;
+        let container = document.getElementById('comparisonWrapper');
+        let sliderLine = document.getElementById('dividerLine');
+        let sliderButton = document.getElementById('dragHandle');
+        let afterImage = document.getElementById('imageAfter');
 
+        function updateSlider(percentage) {
+            // Clamp percentage between 0 and 100
+            percentage = Math.max(0, Math.min(100, percentage));
+            
+            // Update slider line position
+            sliderLine.style.left = percentage + '%';
+            sliderButton.style.left = percentage + '%';
+            
+            // Update after image clip path
+            afterImage.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
+        }
+
+        function getPercentageFromEvent(e) {
+            let rect = container.getBoundingClientRect();
+            let x = (e.clientX || e.touches[0].clientX) - rect.left;
+            return (x / rect.width) * 100;
+        }
+
+        // Mouse events
+        sliderButton.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            e.preventDefault();
+        });
+
+        container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            updateSlider(getPercentageFromEvent(e));
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                updateSlider(getPercentageFromEvent(e));
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Touch events for mobile
+        sliderButton.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            e.preventDefault();
+        });
+
+        container.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            updateSlider(getPercentageFromEvent(e));
+            e.preventDefault();
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                updateSlider(getPercentageFromEvent(e));
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        // Prevent image dragging
+        container.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+        });
+
+        // Initialize slider at 50%
+        updateSlider(50);
+</script>
 
 
 
