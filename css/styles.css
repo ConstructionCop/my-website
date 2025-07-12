@@ -80,6 +80,21 @@ a {
   transform: translateY(0);
 }
 
+.fade-in-down {
+  animation: fadeInDown 0.6s ease-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Optional: Add different delays for staggered animations */
 .delay-1 { transition-delay: 0.1s; }
 .delay-2 { transition-delay: 0.2s; }
@@ -794,23 +809,19 @@ margin: 75px 0 100px 0;
   }
   
   .slide:nth-child(1) {
-    background-image: url('../assets/Banner-Slider.webp');
+    background-image: url('../assets/Vision-Street-Wear-Banner-Slider.webp');
   }
   
   .slide:nth-child(2) {
-    background-image: url('../assets/DS-Banner-Slider.jpg');
+    background-image: url('../assets/Denim-Society-Banner-Slider.webp');
   }
   
   .slide:nth-child(3) {
-    background-image: url('../assets/Photography-Banner-Slider.jpg');
+    background-image: url('../assets/Photography-Banner-Slider.webp');
   }
   
   .slide:nth-child(4) {
-    background-image: url('../assets/Croyds-Banner-Slider.jpg');
-  }
-  
-  .slide:nth-child(5) {
-    background-image: url('../assets/5.jpg');
+    background-image: url('../assets/Croyds-Banner-Slider.webp');
   }
   
   .navigation-wrapper {
@@ -1162,31 +1173,31 @@ margin: 75px 0 100px 0;
 .small-images-row-1 .small-image:nth-child(1){
   width:250px;
   aspect-ratio: 1.34/1;
-  background-image: url('../assets/Comp-3.jpg');
+  background-image: url('../assets/Croyds-Book-Reading-Front.webp');
 }
 
 .small-images-row-1 .small-image:nth-child(2){
   width:200px;
   aspect-ratio: 1/1.2;
-  background-image: url('../assets/Magazine-Front-Page.webp');
+  background-image: url('../assets/Vision-Street-Wear-Magazine-Front-Page.webp');
 }
 
 .small-images-row-2 .small-image:nth-child(1){
   width:300px;
   aspect-ratio: 1.34/1;
-  background-image: url('../assets/Warriors-heart_2.webp');
+  background-image: url('../assets/Warriors-Heart-Front-Page.webp');
 }
 
 .small-images-row-3 .small-image:nth-child(1){
   width:200px;
   aspect-ratio: 1/1.2;
-  background-image: url('../assets/Ipad-Front-Page.webp');
+  background-image: url('../assets/Denim-Society-Ipad-Front-Page.webp');
 }
 
 .small-images-row-3 .small-image:nth-child(2){
   width:250px;
   aspect-ratio: 1.34/1;
-  background-image: url('../assets/Croyds\ Front\ Page.webp'); 
+  background-image: url('../assets/Croyds-Product-Showcase.webp'); 
 }
 
 .large-image-row{
@@ -1308,10 +1319,11 @@ margin: 75px 0 100px 0;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 50px 0 50px 0;
+    padding: 50px;
     height: 70px;
     background-color: #000000;
-    margin-top: 0px;
+    margin: 75px auto 0 auto;
+    max-width: 1480px;
 }
 
 
@@ -1359,7 +1371,8 @@ margin: 75px 0 100px 0;
 .project-image{
   background-size: cover;
   border-radius: 12px;
-  height: 550px;
+  height: calc(70vw * 0.6); 
+  max-height: 600px;;
 }
 
 .project-video{
@@ -1455,11 +1468,10 @@ margin: 75px 0 100px 0;
 
 .vsw-ads-resize{
   grid-column: span 4;
-  height: calc(50vw * 0.6);
   width: 100%; /* Ensure video takes full width of its grid cell */
   object-fit: cover; /* This helps maintain aspect ratio */
   border-radius: 12px; /* Match the border-radius of other items */
-  
+  max-height: 450px;
 }
 
 
@@ -1479,6 +1491,7 @@ margin: 75px 0 100px 0;
   display: flex;
   justify-content: center;
   align-items: center; 
+  
 }
 
 .vsw-iphone-banner{
@@ -1570,6 +1583,7 @@ margin: 75px 0 100px 0;
 
 .ds-iphone-banner{
   grid-column:  span 5;
+  background-position: center;
 }
 
 
@@ -1628,6 +1642,7 @@ margin: 75px 0 100px 0;
   grid-column:  span 8;
   background-position: center;
   height:100%;
+  max-height: 100%;
 }
 
 .croyds-video-story{
@@ -1783,12 +1798,13 @@ img {
 .comparison-wrapper {
   position: relative;
   width: 100%;
-  height: 550px;
+  height: calc(70vw * 0.6);
   max-width: 100%;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   cursor: grab;
+  max-height: 600px;
 }
 
 .comparison-wrapper:active {
@@ -1814,7 +1830,7 @@ img {
   left: 50%;
   width: 3px;
   height: 100%;
-  background: linear-gradient(to bottom, #fff, #ddd);
+  background: #DC3E3E;
   transform: translateX(-50%);
   z-index: 10;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -1826,7 +1842,7 @@ img {
   left: 50%;
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #DC3E3E;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   cursor: grab;
@@ -1851,7 +1867,7 @@ img {
   content: '';
   width: 0;
   height: 0;
-  border-left: 8px solid white;
+  border-left: 8px solid rgb(0, 0, 0);
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   margin-right: 2px;
@@ -1861,7 +1877,7 @@ img {
   content: '';
   width: 0;
   height: 0;
-  border-right: 8px solid white;
+  border-right: 8px solid rgb(0, 0, 0);
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
   margin-left: 2px;
@@ -1879,11 +1895,12 @@ img {
 }
 
 .text-label {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
+  font-family: 'IBMPlexMono-Light', Arial, sans-serif;
+  background: #DC3E3E;
+  color: rgb(0, 0, 0);
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -2273,6 +2290,7 @@ scrollbar-width: none;  /* Firefox */
   display: flex;
   flex-direction: row;
   align-items: center;
+  
 }
 
 .scroll-project-image-container{
@@ -2306,11 +2324,11 @@ scrollbar-width: none;  /* Firefox */
   font-family: 'ClashDisplay-Bold', Arial, sans-serif;
   font-size: 32px;
   font-weight: 500;
-  flex: 1;
   padding: 0 20px;
   color: #ffffff;
   text-transform: uppercase;
-  line-height:0.9
+  line-height:0.9;
+
 }
 
 .scroll-project-year {
@@ -2328,13 +2346,7 @@ scrollbar-width: none;  /* Firefox */
   border-radius: 4px;
 }
 
-.projects-page .footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin: 0;
-}
+
 
 .project-link {
   text-decoration: none;
@@ -2408,6 +2420,10 @@ scrollbar-width: none;  /* Firefox */
     width:40%;
   }
 
+  .vsw-ads-resize{
+    max-height: 375px;
+  }
+
 }
 
 
@@ -2479,6 +2495,55 @@ scrollbar-width: none;  /* Firefox */
   .project-description-paragraph{
     width:50%;
   }
+
+    .project-link{
+    justify-content: center;
+  }
+
+  .scroll-project-left{
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .projects-section{
+    padding: 0 50px;
+  }
+
+  .project-container{
+    flex-direction: column;
+  }
+
+  .scroll-project-number-title{
+    flex-direction: column;
+    gap:10px;
+  }
+
+  .scroll-project-number {
+    text-align: center;
+  }
+
+  .scroll-project-title {
+    text-align: center;
+  }
+  .scroll-project-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .scroll-project-right{
+    display:none;
+  }
+
+  .scroll-project-year{
+    margin-right: auto;
+  }
+
+  .vsw-ads-resize{
+    max-height: 300px;
+  }
+
+
+  
 
 }
 
@@ -2807,6 +2872,13 @@ text-align: center;  }
   }
   
 
+  .projects-footer{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column-reverse;
+    gap:20px;
+    padding: 50px 0 30px 0
+  }
   
 
   .project-image-section{
@@ -2817,6 +2889,11 @@ text-align: center;  }
 
   .project-image{
     height: calc(150vw * 0.6)
+  }
+
+  .vsw-ads-resize{
+    
+    max-height: calc(150vw * 0.6)
   }
 
   .project-description-section{
