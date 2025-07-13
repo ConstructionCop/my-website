@@ -388,7 +388,7 @@
         <div class="project-attributes">
           <div class="slide-title-button">
           <div class="slide-title-index">Title for Slide 1</div> 
-            <button class="slide-action-button-index">View Project<span class="button-dot"></span></button>
+            <button class="slide-action-button">View Project<span class="button-dot"></span></button>
           </div>
 
           <div class="slide-description">
@@ -625,53 +625,10 @@
 
 
 
-<script>
-   const hamburgerBtn = document.getElementById('hamburgerBtn');
-const hamburgerBtnMenu = document.getElementById('hamburgerBtnMenu');
-const body = document.body;
-
-// Open the menu when clicking the main hamburger button
-hamburgerBtn.addEventListener('click', function() {
-  body.classList.add('menu-open');
-});
-
-hamburgerBtnMenu.addEventListener('click', function() {
-  body.classList.add('menu-closing');
-  
-  setTimeout(function() {
-    body.classList.remove('menu-open');
-    body.classList.remove('menu-closing');
-  }, 0); // Enough time for the transitions to complete
-});
-  </script>
 
 
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Initial check for elements in viewport on page load
-    const elements = document.querySelectorAll('.fade-in-up');
-    checkVisibility(elements);
-    
-    // Check again when scrolling
-    window.addEventListener('scroll', function() {
-      checkVisibility(elements);
-    });
-    
-    function checkVisibility(elements) {
-      elements.forEach(element => {
-        // Get element position relative to viewport
-        const position = element.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        // If element is in viewport (with some buffer)
-        if (position.top < windowHeight * 0.9) {
-          element.classList.add('visible');
-        }
-      });
-    }
-  });
-</script>
+
 
 
 
