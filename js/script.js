@@ -508,5 +508,32 @@ function initRandomCharacterAnimation() {
     }
   });
   
+  // Process .name elements
+  const nameElements = document.querySelectorAll('.name');
+  nameElements.forEach(nameElement => {
+    // Ensure name link always remains clickable
+    nameElement.style.position = 'relative';
+    nameElement.style.pointerEvents = 'auto';
+    
+    // Create a span wrapper for the text content to animate
+    const originalText = nameElement.innerText;
+    const textSpan = document.createElement('span');
+    textSpan.className = 'name-text';
+    textSpan.innerText = originalText;
+    textSpan.style.pointerEvents = 'none'; // Ensure text can't capture clicks
+    
+    // Replace the text content with the span
+    nameElement.innerHTML = '';
+    nameElement.appendChild(textSpan);
+    
+    // Initialize animation for the name text
+    new RandomCharacterAnimation(textSpan, {
+      iterations: 10,
+      speed: 40
+    });
+    
+    console.log('Name element animation initialized for:', originalText);
+  });
+  
   console.log('Random character animation initialized.');
 }
