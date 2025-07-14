@@ -554,31 +554,7 @@ function updateLabel(label, resizeElement, position) {
 
 
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Initial check for elements in viewport on page load
-    const elements = document.querySelectorAll('.fade-in-up');
-    checkVisibility(elements);
-    
-    // Check again when scrolling
-    window.addEventListener('scroll', function() {
-      checkVisibility(elements);
-    });
-    
-    function checkVisibility(elements) {
-      elements.forEach(element => {
-        // Get element position relative to viewport
-        const position = element.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        // If element is in viewport (with some buffer)
-        if (position.top < windowHeight * 0.9) {
-          element.classList.add('visible');
-        }
-      });
-    }
-  });
-</script>
+
 
 
 

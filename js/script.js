@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize hamburger menu
   initHamburgerMenu();
   
+  // Initialize scroll animations
+  initScrollAnimations();
+  
   console.log('All scripts initialization complete.');
 });
 
@@ -47,6 +50,43 @@ function initHamburgerMenu() {
     console.log('hamburgerBtn:', hamburgerBtn);
     console.log('hamburgerBtnMenu:', hamburgerBtnMenu);
     console.log('body:', body);
+  }
+}
+
+// Initialize scroll animations functionality
+function initScrollAnimations() {
+  console.log('Initializing scroll animations...');
+  
+  // Get all elements with fade-in-up class
+  const elements = document.querySelectorAll('.fade-in-up');
+  
+  if (elements.length > 0) {
+    console.log('Found', elements.length, 'elements with fade-in-up class');
+    
+    // Initial check for elements in viewport on page load
+    checkVisibility(elements);
+    
+    // Check again when scrolling
+    window.addEventListener('scroll', function() {
+      checkVisibility(elements);
+    });
+    
+    function checkVisibility(elements) {
+      elements.forEach(element => {
+        // Get element position relative to viewport
+        const position = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // If element is in viewport (with some buffer)
+        if (position.top < windowHeight * 0.9) {
+          element.classList.add('visible');
+        }
+      });
+    }
+    
+    console.log('Scroll animations initialized successfully');
+  } else {
+    console.log('No elements with fade-in-up class found');
   }
 }
 
