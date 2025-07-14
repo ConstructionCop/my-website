@@ -18,12 +18,24 @@ hamburgerBtnMenu.addEventListener('click', function() {
   }, 0); // Enough time for the transitions to complete
 });
 
+
+
+
+
+
 //=========CONSOLIDATED DOM CONTENT LOADED=========
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log('DOM loaded, initializing components...');
 
   
+
+
+
+
+
+
+
   //=========FADE ANIMATIONS=========
   
   // Initial check for elements in viewport on page load
@@ -49,6 +61,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   
+
+
+
+
+
+
+
   
   //=========PROJECT SLIDER=========
   
@@ -278,6 +297,18 @@ document.addEventListener('DOMContentLoaded', function() {
   
   console.log('Slider initialization complete');
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 //=========COMPARISON SLIDER=========
 
