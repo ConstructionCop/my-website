@@ -48,9 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  
-  
   //=========PROJECT SLIDER=========
+  
   
   const slides = document.querySelectorAll('.slide');
   const indicators = document.querySelectorAll('.indicator');
@@ -64,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const dutyDescription = document.querySelector('.duty-description');
   const toolsDescription = document.querySelector('.tools-description');
   const slideActionButton = document.querySelector('.slide-action-button');
-  const slideActionButtonIndex = document.querySelector('.slide-action-button-index');
 
   // Debug: Check if elements exist
   console.log('Elements found:');
@@ -75,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('slideTitle:', slideTitle);
   console.log('slideTitleIndex:', slideTitleIndex);
   console.log('slideActionButton:', slideActionButton);
-  console.log('slideActionButtonIndex:', slideActionButtonIndex);
 
   // Array of titles corresponding to each slide
   const slideTitles = [
@@ -128,10 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   const slideLinks2 = [
-    './projects/vision-street-wear.html',    // Changed from '../vision-street-wear.html'
-    './projects/denim-society.html',         // Changed from '/projects/denim-society.html'
-    './projects/photography.html',           // Already correct
-    './projects/croyds.html'               // Already correct
+    '../projects/vision-street-wear.html',    
+    '../projects/denim-society.html',         
+    '../projects/photography.html',           
+    '/projects/croyds.html'               
   ];
   
   // Determine initial slide based on current page
@@ -203,13 +200,6 @@ document.addEventListener('DOMContentLoaded', function() {
           slideActionButton.onclick = () => {
             console.log('slideActionButton clicked, opening:', slideLinks[index]);
             window.open(slideLinks[index], '_self');
-          };
-        }
-
-        if (slideActionButtonIndex) {
-          slideActionButtonIndex.onclick = () => {
-            console.log('slideActionButtonIndex clicked, opening:', slideLinks2[index]);
-            window.open(slideLinks2[index], '_self'); 
           };
         }
       }
