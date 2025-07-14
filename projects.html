@@ -140,13 +140,6 @@
     
    
 
-<!--
-      <div class="infinite-scroll-container">
-        <div class="vertical-scroll-container" id="scrollContainer">
-            
-        </div>
-    </div>
-  -->
 
 
 <section class="projects-section">
@@ -242,103 +235,6 @@
 
 
 
-<script>
- document.addEventListener('DOMContentLoaded', function() {
-    // Sample project data - 5 projects
-    const projects = [
-        { id: '01', title: 'Vision Street Wear', imageUrl: 'assets/EN_1080x1080_DECKS.jpg', imageUrl2: 'assets/EN_1080x1080_BLACK_FRIDAY.jpg', imageUrl3: 'assets/EN_1080x1080_NEW_SHOES.jpg', year: '2023-2025', link: 'projects/vision-street-wear.html' },
-        { id: '02', title: 'Denim Society', imageUrl: 'assets/DS_1080x1080_BOXING_WEEK.png', imageUrl2: 'assets/DS_1080x1080_BOGO.jpg', imageUrl3: 'assets/DS_1080x1080_BOXING_DAY.jpg', year: '2023 - 2025', link: 'projects/denim-society.html' },
-        { id: '03', title: 'Photography', imageUrl: 'assets/ariana2.webp', imageUrl2: 'assets/Warriors-heart_2.webp', imageUrl3: 'assets/joey.webp', year: 'n/a', link: 'projects/photography.html' },
-        { id: '04', title: 'Croyds', imageUrl: 'assets/Show_In_Tell_Blue Ryder.00_00_33_26.Still002.webp', imageUrl2: 'assets/Croyds-Small-Scale-Art.jpg', imageUrl3: 'assets/Comp-3.jpg', year: '2025', link: 'projects/croyds.html' },
-        { id: '05', title: 'Project Epsilon', imageUrl: 'https://via.placeholder.com/300x200/9b59b6/ffffff', imageUrl2: 'https://via.placeholder.com/300x200/8e44ad/ffffff', imageUrl3: 'https://via.placeholder.com/300x200/6c3483/ffffff', year: '2023', link: '#project-epsilon' },
-    ];
-
-    const scrollContainer = document.getElementById('scrollContainer');
-            
-    // Create function to generate project item HTML
-    function createProjectItem(project, index) {
-        const projectItem = document.createElement('div');
-        projectItem.className = 'project-item';
-        projectItem.innerHTML = `
-            <a href="${project.link}" class="project-link" style="opacity: 1;">
-                <div class="scroll-project-left">
-                  <div class="scroll-project-number-title">
-                    <div class="scroll-project-number">${project.id}</div>
-                    <div class="scroll-project-title">${project.title}</div>
-                  </div>
-                  <div class="scroll-project-image-container">
-                    <img class="scroll-project-image" src="${project.imageUrl}" alt="${project.title}">
-                    <img class="scroll-project-image" src="${project.imageUrl2}" alt="${project.title}">
-                    <img class="scroll-project-image" src="${project.imageUrl3}" alt="${project.title}">
-                  </div>
-                </div>
-                <div class="scroll-project-right">
-                    <div class="scroll-project-year">${project.year}</div>
-                </div>
-            </a>
-        `;
-        
-        return projectItem;
-    }
-
-    // Initialize with three copies of projects for infinite scroll effect
-    function initializeScroll() {
-        // Clear existing content
-        scrollContainer.innerHTML = '';
-                    
-        // Add many copies of the projects for robust infinite scroll at any zoom level
-        const copies = [];
-        for (let i = 0; i < 20; i++) {
-            copies.push(...projects);
-        }
-        copies.forEach((project, index) => {
-            scrollContainer.appendChild(createProjectItem(project, index));
-        });
-    }
-
-    // Initialize the scroll container
-    initializeScroll();
-            
-    // Set initial scroll position to the middle set
-    let itemHeight;
-            
-    // Calculate heights and set initial position
-    function setupScroll() {
-        const containerHeight = scrollContainer.scrollHeight;
-        const totalItems = projects.length * 20; // Twenty copies of 5 projects = 100 total
-        itemHeight = containerHeight / totalItems;
-                    
-        // Start at the middle - position 50 (10th set out of 20)
-        scrollContainer.scrollTop = itemHeight * projects.length * 10;
-    }
-            
-    // We need to wait for images to load to get accurate heights
-    if (document.readyState === 'complete') {
-        setupScroll();
-    } else {
-        window.addEventListener('load', setupScroll);
-    }
-
-    // Handle scroll events for infinite scroll
-    scrollContainer.addEventListener('scroll', function() {
-        if (!itemHeight) {
-            const containerHeight = scrollContainer.scrollHeight;
-            const totalItems = projects.length * 20; // 5 projects * 20 copies = 100
-            itemHeight = containerHeight / totalItems;
-        }
-                    
-        // When we've scrolled past the 15th set, jump back to the 5th set
-        if (scrollContainer.scrollTop >= itemHeight * projects.length * 15) {
-            scrollContainer.scrollTop = scrollContainer.scrollTop - (itemHeight * projects.length * 10);
-        }
-                    
-        // When we've scrolled above the 5th set, jump to the 15th set
-        if (scrollContainer.scrollTop <= itemHeight * projects.length * 5) {
-            scrollContainer.scrollTop = scrollContainer.scrollTop + (itemHeight * projects.length * 10);
-        }
-    });
-});
-</script>
 
 
 
@@ -349,87 +245,6 @@
 
 
 
-
-
-<script>jQuery(document).ready(function($){
-    //check if the .image-container is in the viewport 
-    //if yes, animate it
-    checkPosition($('.image-container'));
-    $(window).on('scroll', function(){
-        checkPosition($('.image-container'));
-    });
-    
-    //make the .handle element draggable and modify .resize-image width according to its position
-    drags($('.handle'), $('.resize-image'), $('.image-container'), $('.image-label[data-type="original"]'), $('.image-label[data-type="modified"]'));
-
-    //upadate images label visibility
-    $(window).on('resize', function(){
-        updateLabel($('.image-label[data-type="modified"]'), $('.resize-image'), 'left');
-        updateLabel($('.image-label[data-type="original"]'), $('.resize-image'), 'right');
-    });
-});
-
-function checkPosition(container) {
-    if( $(window).scrollTop() + $(window).height()*0.5 > container.offset().top) {
-        container.addClass('is-visible');
-        //you can uncomment the following line if you don't have other events to bind to the window scroll
-        // $(window).off('scroll');
-    }
-}
-
-//draggable funtionality
-function drags(dragElement, resizeElement, container, labelContainer, labelResizeElement) {
-    dragElement.on("mousedown vmousedown", function(e) {
-        dragElement.addClass('draggable');
-        resizeElement.addClass('resizable');
-
-        var dragWidth = dragElement.outerWidth(),
-            xPosition = dragElement.offset().left + dragWidth - e.pageX,
-            containerOffset = container.offset().left,
-            containerWidth = container.outerWidth(),
-            minLeft = containerOffset + 10,
-            maxLeft = containerOffset + containerWidth - dragWidth - 10;
-        
-        dragElement.parents().on("mousemove vmousemove", function(e) {
-            leftValue = e.pageX + xPosition - dragWidth;
-            
-            //constrain the draggable element to move inside his container
-            if(leftValue < minLeft ) {
-                leftValue = minLeft;
-            } else if ( leftValue > maxLeft) {
-                leftValue = maxLeft;
-            }
-
-            widthValue = (leftValue + dragWidth/2 - containerOffset)*100/containerWidth+'%';
-            
-            $('.draggable').css('left', widthValue).on("mouseup vmouseup", function() {
-                $(this).removeClass('draggable');
-                resizeElement.removeClass('resizable');
-            });
-
-            $('.resizable').css('width', widthValue); 
-
-            updateLabel(labelResizeElement, resizeElement, 'left');
-            updateLabel(labelContainer, resizeElement, 'right');
-            
-        }).on("mouseup vmouseup", function(e){
-            dragElement.removeClass('draggable');
-            resizeElement.removeClass('resizable');
-        });
-        e.preventDefault();
-    }).on("mouseup vmouseup", function(e) {
-        dragElement.removeClass('draggable');
-        resizeElement.removeClass('resizable');
-    });
-}
-
-function updateLabel(label, resizeElement, position) {
-    if(position == 'left') {
-        ( label.offset().left + label.outerWidth() < resizeElement.offset().left + resizeElement.outerWidth() ) ? label.removeClass('is-hidden') : label.addClass('is-hidden') ;
-    } else {
-        ( label.offset().left > resizeElement.offset().left + resizeElement.outerWidth() ) ? label.removeClass('is-hidden') : label.addClass('is-hidden') ;
-    }
-}</script>
 
 
 
