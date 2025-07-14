@@ -1,4 +1,67 @@
+
+//=========HAMBURGER MENU TOGGLE=========
+
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const hamburgerBtnMenu = document.getElementById('hamburgerBtnMenu');
+const body = document.body;
+
+// Open the menu when clicking the main hamburger button
+hamburgerBtn.addEventListener('click', function() {
+  body.classList.add('menu-open');
+});
+
+hamburgerBtnMenu.addEventListener('click', function() {
+  body.classList.add('menu-closing');
+  
+  setTimeout(function() {
+    body.classList.remove('menu-open');
+    body.classList.remove('menu-closing');
+  }, 0); // Enough time for the transitions to complete
+});
+
+
+
+
+
+
+//=========CONSOLIDATED DOM CONTENT LOADED=========
+
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded, initializing components...');
+
+
+
+
+
+
+  //=========FADE ANIMATIONS=========
+  
+  // Initial check for elements in viewport on page load
+  const elements = document.querySelectorAll('.fade-in-up');
+  checkVisibility(elements);
+  
+  // Check again when scrolling
+  window.addEventListener('scroll', function() {
+    checkVisibility(elements);
+  });
+  
+  function checkVisibility(elements) {
+    elements.forEach(element => {
+      // Get element position relative to viewport
+      const position = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // If element is in viewport (with some buffer)
+      if (position.top < windowHeight * 0.9) {
+        element.classList.add('visible');
+      }
+    });
+  }
+  
+
+
+
+
   const slides = document.querySelectorAll('.slide');
   const indicators = document.querySelectorAll('.indicator');
   const navLeft = document.querySelector('.nav-left');
@@ -142,3 +205,93 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+//=========COMPARISON SLIDER=========
+
+let isDragging = false;
+        let container = document.getElementById('comparisonWrapper');
+        let sliderLine = document.getElementById('dividerLine');
+        let sliderButton = document.getElementById('dragHandle');
+        let afterImage = document.getElementById('imageAfter');
+
+        function updateSlider(percentage) {
+            // Clamp percentage between 0 and 100
+            percentage = Math.max(0, Math.min(100, percentage));
+            
+            // Update slider line position
+            sliderLine.style.left = percentage + '%';
+            sliderButton.style.left = percentage + '%';
+            
+            // Update after image clip path
+            afterImage.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
+        }
+
+        function getPercentageFromEvent(e) {
+            let rect = container.getBoundingClientRect();
+            let x = (e.clientX || e.touches[0].clientX) - rect.left;
+            return (x / rect.width) * 100;
+        }
+
+        // Mouse events
+        sliderButton.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            e.preventDefault();
+        });
+
+        container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            updateSlider(getPercentageFromEvent(e));
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                updateSlider(getPercentageFromEvent(e));
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Touch events for mobile
+        sliderButton.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            e.preventDefault();
+        });
+
+        container.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            updateSlider(getPercentageFromEvent(e));
+            e.preventDefault();
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                updateSlider(getPercentageFromEvent(e));
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        // Prevent image dragging
+        container.addEventListener('dragstart', (e) => {
+            e.preventDefault();
+        });
+
+        // Initialize slider at 50%
+        updateSlider(50);
