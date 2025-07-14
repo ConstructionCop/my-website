@@ -1,4 +1,3 @@
-
 //=========HAMBURGER MENU TOGGLE=========
 
 const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -19,29 +18,14 @@ hamburgerBtnMenu.addEventListener('click', function() {
   }, 0); // Enough time for the transitions to complete
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//=========FADE ANIMATIONS=========
+//=========CONSOLIDATED DOM CONTENT LOADED=========
 
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded, initializing components...');
+
+  
+  //=========FADE ANIMATIONS=========
+  
   // Initial check for elements in viewport on page load
   const elements = document.querySelectorAll('.fade-in-up');
   checkVisibility(elements);
@@ -63,26 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//=========PROJECT SLIDER=========
-
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, starting slider initialization...');
+  
+  //=========PROJECT SLIDER=========
+  
   
   const slides = document.querySelectorAll('.slide');
   const indicators = document.querySelectorAll('.indicator');
@@ -96,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const dutyDescription = document.querySelector('.duty-description');
   const toolsDescription = document.querySelector('.tools-description');
   const slideActionButton = document.querySelector('.slide-action-button');
-  const slideActionButtonIndex = document.querySelector('.slide-action-button-index');
 
   // Debug: Check if elements exist
   console.log('Elements found:');
@@ -107,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('slideTitle:', slideTitle);
   console.log('slideTitleIndex:', slideTitleIndex);
   console.log('slideActionButton:', slideActionButton);
-  console.log('slideActionButtonIndex:', slideActionButtonIndex);
 
   // Array of titles corresponding to each slide
   const slideTitles = [
@@ -237,13 +202,6 @@ document.addEventListener('DOMContentLoaded', function() {
             window.open(slideLinks[index], '_self');
           };
         }
-
-        if (slideActionButtonIndex) {
-          slideActionButtonIndex.onclick = () => {
-            console.log('slideActionButtonIndex clicked, opening:', slideLinks2[index]);
-            window.open(slideLinks2[index], '_self'); 
-          };
-        }
       }
     });
   }
@@ -310,24 +268,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   console.log('Slider initialization complete');
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //=========COMPARISON SLIDER=========
 
@@ -406,8 +346,6 @@ let isDragging = false;
 
         // Initialize slider at 50%
         updateSlider(50);
-
-
 
 
 
