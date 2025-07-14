@@ -1,5 +1,58 @@
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, starting slider initialization...');
+  console.log('DOM loaded, starting script initialization...');
+  
+  // Initialize slider functionality
+  initSlider();
+  
+  // Initialize random character animation
+  initRandomCharacterAnimation();
+  
+  // Initialize hamburger menu
+  initHamburgerMenu();
+  
+  console.log('All scripts initialization complete.');
+});
+
+// Initialize hamburger menu functionality
+function initHamburgerMenu() {
+  console.log('Initializing hamburger menu...');
+  
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const hamburgerBtnMenu = document.getElementById('hamburgerBtnMenu');
+  const body = document.body;
+
+  // Check if elements exist before adding listeners
+  if (hamburgerBtn && hamburgerBtnMenu && body) {
+    // Open the menu when clicking the main hamburger button
+    hamburgerBtn.addEventListener('click', function() {
+      body.classList.add('menu-open');
+      console.log('Menu opened');
+    });
+
+    // Close the menu when clicking the menu hamburger button
+    hamburgerBtnMenu.addEventListener('click', function() {
+      body.classList.add('menu-closing');
+      console.log('Menu closing...');
+      
+      setTimeout(function() {
+        body.classList.remove('menu-open');
+        body.classList.remove('menu-closing');
+        console.log('Menu closed');
+      }, 0); // Enough time for the transitions to complete
+    });
+    
+    console.log('Hamburger menu listeners added successfully');
+  } else {
+    console.log('Warning: Hamburger menu elements not found');
+    console.log('hamburgerBtn:', hamburgerBtn);
+    console.log('hamburgerBtnMenu:', hamburgerBtnMenu);
+    console.log('body:', body);
+  }
+}
+
+// Initialize slider functionality
+function initSlider() {
+  console.log('Initializing slider...');
   
   const slides = document.querySelectorAll('.slide');
   const indicators = document.querySelectorAll('.indicator');
@@ -67,7 +120,8 @@ document.addEventListener('DOMContentLoaded', function() {
     'PHOTOSHOP SHOPIFY<br>HTML<br>CSS',
     'PHOTOSHOP SHOPIFY<br>HTML<br>CSS',
     'Lightroom<br>Photoshop',
-    'After Effects<br>Premiere Pro<br>Photoshop'  ];
+    'After Effects<br>Premiere Pro<br>Photoshop'
+  ];
 
   const slideLinks = [
     '../projects/vision-street-wear.html', 
@@ -77,10 +131,10 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   const slideLinks2 = [
-    './projects/vision-street-wear.html',    // Changed from '../vision-street-wear.html'
-    './projects/denim-society.html',         // Changed from '/projects/denim-society.html'
-    './projects/photography.html',           // Already correct
-    './projects/croyds.html'               // Already correct
+    './projects/vision-street-wear.html',
+    './projects/denim-society.html',
+    './projects/photography.html',
+    './projects/croyds.html'
   ];
   
   // Determine initial slide based on current page
@@ -226,4 +280,193 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   console.log('Slider initialization complete');
-});
+}
+
+// Define a RandomCharacterAnimation class
+class RandomCharacterAnimation {
+  constructor(element, options = {}) {
+    this.element = element;
+    this.originalText = element.innerText;
+    this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+    this.iterations = options.iterations || 10;
+    this.speed = options.speed || 50;
+    this.isAnimating = false;
+    this.animationFrames = [];
+    
+    // Get the parent element (either button or anchor)
+    this.parentElement = this.findParent(element, ['button', 'a']);
+    
+    if (this.parentElement) {
+      // Bind event listeners to the parent element
+      this.parentElement.addEventListener('mouseenter', this.startAnimation.bind(this));
+      this.parentElement.addEventListener('mouseleave', this.stopAnimation.bind(this));
+      
+      // Ensure Safari can click during animation by setting pointer-events explicitly
+      this.parentElement.style.pointerEvents = 'auto';
+      this.element.style.pointerEvents = 'none';
+    }
+  }
+  
+  // Helper function to find parent element by tag names (array)
+  findParent(element, tagNames) {
+    let currentElement = element;
+    while (currentElement) {
+      if (tagNames.includes(currentElement.tagName.toLowerCase())) {
+        return currentElement;
+      }
+      currentElement = currentElement.parentElement;
+    }
+    return null;
+  }
+  
+  getRandomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }
+  
+  animateChar(index, iteration) {
+    if (!this.isAnimating) return;
+    
+    const text = this.element.innerText.split('');
+    
+    // Replace the character at index with a random character
+    if (iteration < this.iterations) {
+      text[index] = this.getRandomChar();
+      this.element.innerText = text.join('');
+      
+      // Continue animation for this character
+      const timeoutId = setTimeout(() => {
+        this.animateChar(index, iteration + 1);
+      }, this.speed);
+      
+      this.animationFrames.push(timeoutId);
+    } else {
+      // Restore original character at this position
+      text[index] = this.originalText[index];
+      this.element.innerText = text.join('');
+    }
+  }
+  
+  startAnimation() {
+    this.isAnimating = true;
+    
+    // Start animation for each character with slight delay
+    for (let i = 0; i < this.originalText.length; i++) {
+      const timeoutId = setTimeout(() => {
+        this.animateChar(i, 0);
+      }, i * 50);
+      
+      this.animationFrames.push(timeoutId);
+    }
+  }
+  
+  stopAnimation() {
+    this.isAnimating = false;
+    
+    // Clear all animation frames
+    this.animationFrames.forEach(id => clearTimeout(id));
+    this.animationFrames = [];
+    
+    // Reset text immediately
+    this.element.innerText = this.originalText;
+  }
+}
+
+// Initialize random character animation
+function initRandomCharacterAnimation() {
+  console.log('Initializing random character animation...');
+  
+  // Process slide-action-buttons
+  const actionButtons = document.querySelectorAll('.slide-action-button');
+  actionButtons.forEach(button => {
+    // Make sure the button always remains clickable
+    button.style.position = 'relative';
+    button.style.pointerEvents = 'auto';
+    
+    // Extract text content (first text node)
+    let textNode = null;
+    for (const node of button.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim()) {
+        textNode = node;
+        break;
+      }
+    }
+    
+    if (textNode) {
+      const buttonText = textNode.nodeValue.trim();
+      
+      // Create a new span for the text
+      const textSpan = document.createElement('span');
+      textSpan.className = 'button-text';
+      textSpan.innerText = buttonText;
+      textSpan.style.pointerEvents = 'none'; // Ensure text can't capture clicks
+      
+      // Replace the text node with the span
+      button.replaceChild(textSpan, textNode);
+      
+      // Initialize the animation on the text span
+      new RandomCharacterAnimation(textSpan, {
+        iterations: 8,
+        speed: 30
+      });
+    }
+  });
+  
+  // Process slide-action-button-index elements
+  const actionButtonsIndex = document.querySelectorAll('.slide-action-button-index');
+  actionButtonsIndex.forEach(button => {
+    // Make sure the button always remains clickable
+    button.style.position = 'relative';
+    button.style.pointerEvents = 'auto';
+    
+    // Extract text content (first text node)
+    let textNode = null;
+    for (const node of button.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim()) {
+        textNode = node;
+        break;
+      }
+    }
+    
+    if (textNode) {
+      const buttonText = textNode.nodeValue.trim();
+      
+      // Create a new span for the text
+      const textSpan = document.createElement('span');
+      textSpan.className = 'button-text';
+      textSpan.innerText = buttonText;
+      textSpan.style.pointerEvents = 'none'; // Ensure text can't capture clicks
+      
+      // Replace the text node with the span
+      button.replaceChild(textSpan, textNode);
+      
+      // Initialize the animation on the text span
+      new RandomCharacterAnimation(textSpan, {
+        iterations: 8,
+        speed: 30
+      });
+    }
+  });
+  
+  // Process a.button elements
+  const buttonLinks = document.querySelectorAll('a.button');
+  buttonLinks.forEach(link => {
+    // Ensure link always remains clickable
+    link.style.position = 'relative';
+    link.style.pointerEvents = 'auto';
+    
+    // Find the first span child
+    const spans = link.querySelectorAll('span');
+    if (spans.length > 0) {
+      const firstSpan = spans[0];
+      firstSpan.style.pointerEvents = 'none'; // Ensure text can't capture clicks
+      
+      // Initialize animation for the first span
+      new RandomCharacterAnimation(firstSpan, {
+        iterations: 8,
+        speed: 30
+      });
+    }
+  });
+  
+  console.log('Random character animation initialized.');
+}

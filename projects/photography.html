@@ -601,25 +601,7 @@ function updateLabel(label, resizeElement, position) {
 
 
 
-<script>
-   const hamburgerBtn = document.getElementById('hamburgerBtn');
-const hamburgerBtnMenu = document.getElementById('hamburgerBtnMenu');
-const body = document.body;
 
-// Open the menu when clicking the main hamburger button
-hamburgerBtn.addEventListener('click', function() {
-  body.classList.add('menu-open');
-});
-
-hamburgerBtnMenu.addEventListener('click', function() {
-  body.classList.add('menu-closing');
-  
-  setTimeout(function() {
-    body.classList.remove('menu-open');
-    body.classList.remove('menu-closing');
-  }, 0); // Enough time for the transitions to complete
-});
-  </script>
 
 
 
