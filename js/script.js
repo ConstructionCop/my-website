@@ -137,20 +137,14 @@ document.addEventListener('DOMContentLoaded', function() {
     'PHOTOSHOP SHOPIFY<br>HTML<br>CSS',
     'PHOTOSHOP SHOPIFY<br>HTML<br>CSS',
     'Lightroom<br>Photoshop',
-    'After Effects<br>Premiere Pro<br>Photoshop'  ];
+    'After Effects<br>Premiere Pro<br>Photoshop'
+  ];
 
   const slideLinks = [
     '../projects/vision-street-wear.html', 
     '../projects/denim-society.html',
     '../projects/photography.html',
     '../projects/croyds.html'
-  ];
-
-  const slideLinks2 = [
-    './projects/vision-street-wear.html', 
-    '/projects/denim-society.html',
-    '../projects/photography.html',
-    '../projects/croyds.html'              
   ];
   
   // Determine initial slide based on current page
@@ -194,6 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (slideTitle) {
           slideTitle.innerHTML = slideTitles[index];
           slideTitle.style.cursor = 'pointer';
+          // Remove existing click handlers first
+          slideTitle.onclick = null;
           slideTitle.onclick = () => {
             console.log('slideTitle clicked, opening:', slideLinks[index]);
             window.open(slideLinks[index], '_self');
@@ -204,9 +200,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (slideTitleIndex) {
           slideTitleIndex.innerHTML = slideTitles[index];
           slideTitleIndex.style.cursor = 'pointer';
+          // Remove existing click handlers first
+          slideTitleIndex.onclick = null;
           slideTitleIndex.onclick = () => {
-            console.log('slideTitleIndex clicked, opening:', slideLinks2[index]);
-            window.open(slideLinks2[index], '_self');
+            console.log('slideTitleIndex clicked, opening:', slideLinks[index]);
+            window.open(slideLinks[index], '_self');
           };
         }
         
@@ -217,8 +215,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (dutyDescription) dutyDescription.innerHTML = dutyDescriptions[index];
         if (toolsDescription) toolsDescription.innerHTML = toolsDescriptions[index];
         
-        // Set action button links
+        // Set action button links - Remove existing handlers first
         if (slideActionButton) {
+          slideActionButton.onclick = null;
           slideActionButton.onclick = () => {
             console.log('slideActionButton clicked, opening:', slideLinks[index]);
             window.open(slideLinks[index], '_self');
@@ -226,10 +225,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (slideActionButtonIndex) {
-          slideActionButtonIndex.onclick = () => {
-            console.log('slideActionButtonIndex clicked, opening:', slideLinks2[index]);
-            window.open(slideLinks2[index], '_self'); 
+          console.log('Setting up slideActionButtonIndex handler for:', slideLinks[index]);
+          // Remove existing click handlers first
+          slideActionButtonIndex.onclick = null;
+          slideActionButtonIndex.onclick = (e) => {
+            e.preventDefault(); // Prevent any default button behavior
+            e.stopPropagation(); // Stop event bubbling
+            console.log('slideActionButtonIndex clicked, opening:', slideLinks[index]);
+            window.location.href = slideLinks[index]; // Use location.href instead of window.open
           };
+          
+          // Also set cursor to pointer to indicate it's clickable
+          slideActionButtonIndex.style.cursor = 'pointer';
         }
       }
     });
@@ -296,7 +303,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   console.log('Slider initialization complete');
-});
 
 
 
