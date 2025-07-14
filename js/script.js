@@ -147,8 +147,8 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   const slideLinks2 = [
-    '../projects/vision-street-wear.html', 
-    '../projects/denim-society.html',
+    './projects/vision-street-wear.html', 
+    '/projects/denim-society.html',
     '../projects/photography.html',
     '../projects/croyds.html'              
   ];
